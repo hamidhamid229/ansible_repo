@@ -1,0 +1,39 @@
+- name: delete user
+  include_tasks: delete-user.yaml
+
+- name: dns config
+  include_tasks: dns.yaml
+
+- name: Update and Upgrade
+  apt:
+    update_cache: true
+    upgrade: dist
+
+- name: Disable Automate Update
+  copy:
+    dest: /etc/apt/apt.conf.d/20auto-upgrades 
+    content: |
+      APT::Periodic::Update-Package-Lists "0";
+      APT::Periodic::Unattended-Upgrade "0";  
+
+- name: create user
+  user:
+    name: "{{ item.username }}"
+    shell: "{{ item.shell }}"  
+    groups: "{{ item.groups }}"
+    state: present
+  with_items: "{{ usermgmt | list }}"
+
+- name: Set timezone to Asia/Tokyo
+  community.general.timezone:
+    name: Asia/Tehran
+      
+- name: Set a hostname
+  ansible.builtin.hostname:
+    name: pc1
+
+- name: apps
+  include_tasks: apps.yaml
+
+- name: Set permission directory
+  include_tasks: permission_directory.yaml 
