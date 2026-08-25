@@ -610,3 +610,17 @@ If you are using a module and expect the file to exist on the remote, see the re
 2026-08-25 17:51:28,040 p=25117 u=hamid n=ansible INFO| PLAY RECAP *************************************************************************************************************************************
 2026-08-25 17:51:28,040 p=25117 u=hamid n=ansible INFO| master1                    : ok=15   changed=4    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
 2026-08-25 17:51:28,040 p=25117 u=hamid n=ansible INFO| worker1                    : ok=15   changed=4    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+2026-08-25 18:27:22,496 p=27121 u=hamid n=ansible INFO| PLAY [use task common] ********************************************************************************************************************************************************
+2026-08-25 18:27:22,507 p=27121 u=hamid n=ansible INFO| TASK [Gathering Facts] ********************************************************************************************************************************************************
+2026-08-25 18:27:26,826 p=27121 u=hamid n=ansible WARNING| [WARNING]: Host 'worker1' is using the discovered Python interpreter at '/usr/bin/python3.10', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+
+2026-08-25 18:27:26,826 p=27121 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-25 18:27:26,893 p=27121 u=hamid n=ansible WARNING| [WARNING]: Host 'master1' is using the discovered Python interpreter at '/usr/bin/python3.10', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+
+2026-08-25 18:27:26,893 p=27121 u=hamid n=ansible INFO| ok: [master1]
+2026-08-25 18:27:26,896 p=27121 u=hamid n=ansible INFO| TASK [pre-setup : Update and Upgrade] *****************************************************************************************************************************************
+2026-08-25 18:27:32,918 p=27121 u=hamid n=ansible INFO| ok: [master1]
+2026-08-25 18:27:33,395 p=27121 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-25 18:27:33,401 p=27121 u=hamid n=ansible INFO| PLAY RECAP ********************************************************************************************************************************************************************
+2026-08-25 18:27:33,402 p=27121 u=hamid n=ansible INFO| master1                    : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2026-08-25 18:27:33,402 p=27121 u=hamid n=ansible INFO| worker1                    : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
