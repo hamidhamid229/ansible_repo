@@ -183,3 +183,430 @@ Origin: /Users/hamid/ansible/roles/pre-setup/tasks/delete_user.yml:12:9
 2026-08-25 17:16:33,851 p=19902 u=hamid n=ansible INFO| PLAY RECAP ********************************************************************************************************************************************************************
 2026-08-25 17:16:33,851 p=19902 u=hamid n=ansible INFO| master1                    : ok=3    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
 2026-08-25 17:16:33,851 p=19902 u=hamid n=ansible INFO| worker1                    : ok=3    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2026-08-25 17:31:23,459 p=21473 u=hamid n=ansible INFO| PLAY [use task common] *******************************************************************************************************************
+2026-08-25 17:31:23,466 p=21473 u=hamid n=ansible INFO| TASK [Gathering Facts] *******************************************************************************************************************
+2026-08-25 17:31:26,962 p=21473 u=hamid n=ansible WARNING| [WARNING]: Host 'worker1' is using the discovered Python interpreter at '/usr/bin/python3.10', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+
+2026-08-25 17:31:26,962 p=21473 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-25 17:31:27,129 p=21473 u=hamid n=ansible WARNING| [WARNING]: Host 'master1' is using the discovered Python interpreter at '/usr/bin/python3.10', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+
+2026-08-25 17:31:27,130 p=21473 u=hamid n=ansible INFO| ok: [master1]
+2026-08-25 17:31:27,134 p=21473 u=hamid n=ansible INFO| TASK [pre-setup : delete user] ***********************************************************************************************************
+2026-08-25 17:31:27,159 p=21473 u=hamid n=ansible INFO| included: /Users/hamid/ansible/roles/pre-setup/tasks/delete_user.yml for worker1, master1
+2026-08-25 17:31:27,162 p=21473 u=hamid n=ansible INFO| TASK [pre-setup : cute user] *************************************************************************************************************
+2026-08-25 17:31:28,256 p=21473 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-25 17:31:28,271 p=21473 u=hamid n=ansible INFO| changed: [master1]
+2026-08-25 17:31:28,276 p=21473 u=hamid n=ansible INFO| TASK [pre-setup : delete users] **********************************************************************************************************
+2026-08-25 17:31:28,297 p=21473 u=hamid n=ansible ERROR| [ERROR]: Task failed: Error while evaluating conditional: 'myusers' is undefined
+
+Task failed.
+Origin: /Users/hamid/ansible/roles/pre-setup/tasks/delete_user.yml:6:3
+
+4   register: users
+5
+6 - name: delete users
+    ^ column 3
+
+<<< caused by >>>
+
+Error while evaluating conditional: 'myusers' is undefined
+Origin: /Users/hamid/ansible/roles/pre-setup/tasks/delete_user.yml:12:9
+
+10     remove: true 
+11   with_items: "{{ users.stdout_lines }}"
+12   when: item not in myusers
+           ^ column 9
+
+
+2026-08-25 17:31:28,298 p=21473 u=hamid n=ansible INFO| failed: [worker1] (item=nobody) => {"ansible_loop_var": "item", "changed": false, "item": "nobody", "msg": "Task failed: Error while evaluating conditional: 'myusers' is undefined"}
+2026-08-25 17:31:28,298 p=21473 u=hamid n=ansible INFO| failed: [worker1] (item=ubuntu) => {"ansible_loop_var": "item", "changed": false, "item": "ubuntu", "msg": "Task failed: Error while evaluating conditional: 'myusers' is undefined"}
+2026-08-25 17:31:28,300 p=21473 u=hamid n=ansible INFO| failed: [master1] (item=nobody) => {"ansible_loop_var": "item", "changed": false, "item": "nobody", "msg": "Task failed: Error while evaluating conditional: 'myusers' is undefined"}
+2026-08-25 17:31:28,303 p=21473 u=hamid n=ansible INFO| failed: [master1] (item=ubuntu) => {"ansible_loop_var": "item", "changed": false, "item": "ubuntu", "msg": "Task failed: Error while evaluating conditional: 'myusers' is undefined"}
+2026-08-25 17:31:28,305 p=21473 u=hamid n=ansible INFO| PLAY RECAP *******************************************************************************************************************************
+2026-08-25 17:31:28,306 p=21473 u=hamid n=ansible INFO| master1                    : ok=3    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2026-08-25 17:31:28,306 p=21473 u=hamid n=ansible INFO| worker1                    : ok=3    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2026-08-25 17:34:01,809 p=22011 u=hamid n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-08-25 17:34:02,043 p=22011 u=hamid n=ansible INFO| PLAY [use task common] *************************************************************************************************************************
+2026-08-25 17:34:02,043 p=22011 u=hamid n=ansible INFO| skipping: no hosts matched
+2026-08-25 17:34:02,043 p=22011 u=hamid n=ansible INFO| PLAY RECAP *************************************************************************************************************************************
+2026-08-25 17:34:21,289 p=22134 u=hamid n=ansible WARNING| [WARNING]: Could not match supplied host pattern, ignoring: master1
+
+2026-08-25 17:34:21,289 p=22134 u=hamid n=ansible ERROR| [ERROR]: You must pass a single valid host to --host parameter
+
+2026-08-25 17:35:39,075 p=22382 u=hamid n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-08-25 17:35:39,313 p=22382 u=hamid n=ansible INFO| PLAY [use task common] ********************************************************************************************************************************************************
+2026-08-25 17:35:39,313 p=22382 u=hamid n=ansible INFO| skipping: no hosts matched
+2026-08-25 17:35:39,313 p=22382 u=hamid n=ansible INFO| PLAY RECAP ********************************************************************************************************************************************************************
+2026-08-25 17:36:08,073 p=22483 u=hamid n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-08-25 17:36:08,288 p=22483 u=hamid n=ansible INFO| PLAY [use task common] *************************************************************************************************************************
+2026-08-25 17:36:08,288 p=22483 u=hamid n=ansible INFO| skipping: no hosts matched
+2026-08-25 17:36:08,288 p=22483 u=hamid n=ansible INFO| PLAY RECAP *************************************************************************************************************************************
+2026-08-25 17:36:09,720 p=22601 u=hamid n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-08-25 17:36:09,882 p=22601 u=hamid n=ansible INFO| PLAY [use task common] *************************************************************************************************************************
+2026-08-25 17:36:09,883 p=22601 u=hamid n=ansible INFO| skipping: no hosts matched
+2026-08-25 17:36:09,883 p=22601 u=hamid n=ansible INFO| PLAY RECAP *************************************************************************************************************************************
+2026-08-25 17:36:11,089 p=22719 u=hamid n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-08-25 17:36:11,243 p=22719 u=hamid n=ansible INFO| PLAY [use task common] *************************************************************************************************************************
+2026-08-25 17:36:11,244 p=22719 u=hamid n=ansible INFO| skipping: no hosts matched
+2026-08-25 17:36:11,244 p=22719 u=hamid n=ansible INFO| PLAY RECAP *************************************************************************************************************************************
+2026-08-25 17:36:12,457 p=22835 u=hamid n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-08-25 17:36:12,613 p=22835 u=hamid n=ansible INFO| PLAY [use task common] *************************************************************************************************************************
+2026-08-25 17:36:12,613 p=22835 u=hamid n=ansible INFO| skipping: no hosts matched
+2026-08-25 17:36:12,613 p=22835 u=hamid n=ansible INFO| PLAY RECAP *************************************************************************************************************************************
+2026-08-25 17:36:28,770 p=22964 u=hamid n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-08-25 17:36:28,989 p=22964 u=hamid n=ansible INFO| PLAY [use task common] *************************************************************************************************************************
+2026-08-25 17:36:28,989 p=22964 u=hamid n=ansible INFO| skipping: no hosts matched
+2026-08-25 17:36:28,989 p=22964 u=hamid n=ansible INFO| PLAY RECAP *************************************************************************************************************************************
+2026-08-25 17:36:50,834 p=23261 u=hamid n=ansible INFO| PLAY [use task common] *************************************************************************************************************************
+2026-08-25 17:36:50,842 p=23261 u=hamid n=ansible INFO| TASK [Gathering Facts] *************************************************************************************************************************
+2026-08-25 17:36:54,075 p=23261 u=hamid n=ansible WARNING| [WARNING]: Host 'worker1' is using the discovered Python interpreter at '/usr/bin/python3.10', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+
+2026-08-25 17:36:54,075 p=23261 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-25 17:36:54,798 p=23261 u=hamid n=ansible WARNING| [WARNING]: Host 'master1' is using the discovered Python interpreter at '/usr/bin/python3.10', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+
+2026-08-25 17:36:54,799 p=23261 u=hamid n=ansible INFO| ok: [master1]
+2026-08-25 17:36:54,802 p=23261 u=hamid n=ansible INFO| TASK [pre-setup : delete user] *****************************************************************************************************************
+2026-08-25 17:36:54,829 p=23261 u=hamid n=ansible INFO| included: /Users/hamid/ansible/roles/pre-setup/tasks/delete_user.yml for worker1, master1
+2026-08-25 17:36:54,831 p=23261 u=hamid n=ansible INFO| TASK [pre-setup : cute user] *******************************************************************************************************************
+2026-08-25 17:36:55,880 p=23261 u=hamid n=ansible INFO| changed: [master1]
+2026-08-25 17:36:55,897 p=23261 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-25 17:36:55,902 p=23261 u=hamid n=ansible INFO| TASK [pre-setup : delete users] ****************************************************************************************************************
+2026-08-25 17:36:57,090 p=23261 u=hamid n=ansible INFO| changed: [worker1] => (item=nobody)
+2026-08-25 17:36:57,091 p=23261 u=hamid n=ansible INFO| skipping: [worker1] => (item=ubuntu) 
+2026-08-25 17:36:57,123 p=23261 u=hamid n=ansible INFO| changed: [master1] => (item=nobody)
+2026-08-25 17:36:57,125 p=23261 u=hamid n=ansible INFO| skipping: [master1] => (item=ubuntu) 
+2026-08-25 17:36:57,131 p=23261 u=hamid n=ansible INFO| TASK [pre-setup : dns config] ******************************************************************************************************************
+2026-08-25 17:36:57,158 p=23261 u=hamid n=ansible ERROR| [ERROR]: Could not find or access '/Users/hamid/ansible/playbooks/dns.yaml' on the Ansible Controller: Unable to retrieve file contents.
+Could not find or access '/Users/hamid/ansible/playbooks/dns.yaml' on the Ansible Controller.
+If you are using a module and expect the file to exist on the remote, see the remote_src option: [Errno 2] No such file or directory: '/Users/hamid/ansible/playbooks/dns.yaml'
+
+
+2026-08-25 17:36:57,159 p=23261 u=hamid n=ansible INFO| fatal: [worker1]: FAILED! => {"changed": false, "include": "dns.yaml", "reason": "Could not find or access '/Users/hamid/ansible/playbooks/dns.yaml' on the Ansible Controller: Unable to retrieve file contents.\nCould not find or access '/Users/hamid/ansible/playbooks/dns.yaml' on the Ansible Controller.\nIf you are using a module and expect the file to exist on the remote, see the remote_src option: [Errno 2] No such file or directory: '/Users/hamid/ansible/playbooks/dns.yaml'"}
+2026-08-25 17:36:57,159 p=23261 u=hamid n=ansible INFO| fatal: [master1]: FAILED! => {"changed": false, "include": "dns.yaml", "reason": "Could not find or access '/Users/hamid/ansible/playbooks/dns.yaml' on the Ansible Controller: Unable to retrieve file contents.\nCould not find or access '/Users/hamid/ansible/playbooks/dns.yaml' on the Ansible Controller.\nIf you are using a module and expect the file to exist on the remote, see the remote_src option: [Errno 2] No such file or directory: '/Users/hamid/ansible/playbooks/dns.yaml'"}
+2026-08-25 17:36:57,160 p=23261 u=hamid n=ansible INFO| PLAY RECAP *************************************************************************************************************************************
+2026-08-25 17:36:57,160 p=23261 u=hamid n=ansible INFO| master1                    : ok=4    changed=2    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2026-08-25 17:36:57,160 p=23261 u=hamid n=ansible INFO| worker1                    : ok=4    changed=2    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2026-08-25 17:37:01,228 p=23455 u=hamid n=ansible INFO| PLAY [use task common] *************************************************************************************************************************
+2026-08-25 17:37:01,275 p=23455 u=hamid n=ansible INFO| TASK [Gathering Facts] *************************************************************************************************************************
+2026-08-25 17:37:03,482 p=23455 u=hamid n=ansible WARNING| [WARNING]: Host 'master1' is using the discovered Python interpreter at '/usr/bin/python3.10', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+
+2026-08-25 17:37:03,482 p=23455 u=hamid n=ansible INFO| ok: [master1]
+2026-08-25 17:37:03,587 p=23455 u=hamid n=ansible WARNING| [WARNING]: Host 'worker1' is using the discovered Python interpreter at '/usr/bin/python3.10', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+
+2026-08-25 17:37:03,587 p=23455 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-25 17:37:03,591 p=23455 u=hamid n=ansible INFO| TASK [pre-setup : delete user] *****************************************************************************************************************
+2026-08-25 17:37:03,614 p=23455 u=hamid n=ansible INFO| included: /Users/hamid/ansible/roles/pre-setup/tasks/delete_user.yml for worker1, master1
+2026-08-25 17:37:03,617 p=23455 u=hamid n=ansible INFO| TASK [pre-setup : cute user] *******************************************************************************************************************
+2026-08-25 17:37:04,669 p=23455 u=hamid n=ansible INFO| changed: [master1]
+2026-08-25 17:37:04,672 p=23455 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-25 17:37:04,677 p=23455 u=hamid n=ansible INFO| TASK [pre-setup : delete users] ****************************************************************************************************************
+2026-08-25 17:37:04,701 p=23455 u=hamid n=ansible INFO| skipping: [worker1] => (item=ubuntu) 
+2026-08-25 17:37:04,702 p=23455 u=hamid n=ansible INFO| skipping: [worker1]
+2026-08-25 17:37:04,708 p=23455 u=hamid n=ansible INFO| skipping: [master1] => (item=ubuntu) 
+2026-08-25 17:37:04,710 p=23455 u=hamid n=ansible INFO| skipping: [master1]
+2026-08-25 17:37:04,714 p=23455 u=hamid n=ansible INFO| TASK [pre-setup : dns config] ******************************************************************************************************************
+2026-08-25 17:37:04,739 p=23455 u=hamid n=ansible ERROR| [ERROR]: Could not find or access '/Users/hamid/ansible/playbooks/dns.yaml' on the Ansible Controller: Unable to retrieve file contents.
+Could not find or access '/Users/hamid/ansible/playbooks/dns.yaml' on the Ansible Controller.
+If you are using a module and expect the file to exist on the remote, see the remote_src option: [Errno 2] No such file or directory: '/Users/hamid/ansible/playbooks/dns.yaml'
+
+
+2026-08-25 17:37:04,739 p=23455 u=hamid n=ansible INFO| fatal: [worker1]: FAILED! => {"changed": false, "include": "dns.yaml", "reason": "Could not find or access '/Users/hamid/ansible/playbooks/dns.yaml' on the Ansible Controller: Unable to retrieve file contents.\nCould not find or access '/Users/hamid/ansible/playbooks/dns.yaml' on the Ansible Controller.\nIf you are using a module and expect the file to exist on the remote, see the remote_src option: [Errno 2] No such file or directory: '/Users/hamid/ansible/playbooks/dns.yaml'"}
+2026-08-25 17:37:04,740 p=23455 u=hamid n=ansible INFO| fatal: [master1]: FAILED! => {"changed": false, "include": "dns.yaml", "reason": "Could not find or access '/Users/hamid/ansible/playbooks/dns.yaml' on the Ansible Controller: Unable to retrieve file contents.\nCould not find or access '/Users/hamid/ansible/playbooks/dns.yaml' on the Ansible Controller.\nIf you are using a module and expect the file to exist on the remote, see the remote_src option: [Errno 2] No such file or directory: '/Users/hamid/ansible/playbooks/dns.yaml'"}
+2026-08-25 17:37:04,740 p=23455 u=hamid n=ansible INFO| PLAY RECAP *************************************************************************************************************************************
+2026-08-25 17:37:04,740 p=23455 u=hamid n=ansible INFO| master1                    : ok=3    changed=1    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+2026-08-25 17:37:04,740 p=23455 u=hamid n=ansible INFO| worker1                    : ok=3    changed=1    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+2026-08-25 17:38:43,975 p=23654 u=hamid n=ansible INFO| PLAY [use task common] *************************************************************************************************************************
+2026-08-25 17:38:43,984 p=23654 u=hamid n=ansible INFO| TASK [Gathering Facts] *************************************************************************************************************************
+2026-08-25 17:38:46,782 p=23654 u=hamid n=ansible WARNING| [WARNING]: Host 'master1' is using the discovered Python interpreter at '/usr/bin/python3.10', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+
+2026-08-25 17:38:46,782 p=23654 u=hamid n=ansible INFO| ok: [master1]
+2026-08-25 17:38:46,792 p=23654 u=hamid n=ansible WARNING| [WARNING]: Host 'worker1' is using the discovered Python interpreter at '/usr/bin/python3.10', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+
+2026-08-25 17:38:46,792 p=23654 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-25 17:38:46,796 p=23654 u=hamid n=ansible INFO| TASK [pre-setup : delete user] *****************************************************************************************************************
+2026-08-25 17:38:46,819 p=23654 u=hamid n=ansible INFO| included: /Users/hamid/ansible/roles/pre-setup/tasks/delete_user.yml for worker1, master1
+2026-08-25 17:38:46,822 p=23654 u=hamid n=ansible INFO| TASK [pre-setup : cute user] *******************************************************************************************************************
+2026-08-25 17:38:47,541 p=23654 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-25 17:38:47,612 p=23654 u=hamid n=ansible INFO| changed: [master1]
+2026-08-25 17:38:47,618 p=23654 u=hamid n=ansible INFO| TASK [pre-setup : delete users] ****************************************************************************************************************
+2026-08-25 17:38:47,640 p=23654 u=hamid n=ansible INFO| skipping: [worker1] => (item=ubuntu) 
+2026-08-25 17:38:47,642 p=23654 u=hamid n=ansible INFO| skipping: [worker1]
+2026-08-25 17:38:47,644 p=23654 u=hamid n=ansible INFO| skipping: [master1] => (item=ubuntu) 
+2026-08-25 17:38:47,646 p=23654 u=hamid n=ansible INFO| skipping: [master1]
+2026-08-25 17:38:47,650 p=23654 u=hamid n=ansible INFO| TASK [pre-setup : dns config] ******************************************************************************************************************
+2026-08-25 17:38:47,673 p=23654 u=hamid n=ansible ERROR| [ERROR]: Could not find or access '/Users/hamid/ansible/playbooks/dns.yaml' on the Ansible Controller: Unable to retrieve file contents.
+Could not find or access '/Users/hamid/ansible/playbooks/dns.yaml' on the Ansible Controller.
+If you are using a module and expect the file to exist on the remote, see the remote_src option: [Errno 2] No such file or directory: '/Users/hamid/ansible/playbooks/dns.yaml'
+
+
+2026-08-25 17:38:47,673 p=23654 u=hamid n=ansible INFO| fatal: [worker1]: FAILED! => {"changed": false, "include": "dns.yaml", "reason": "Could not find or access '/Users/hamid/ansible/playbooks/dns.yaml' on the Ansible Controller: Unable to retrieve file contents.\nCould not find or access '/Users/hamid/ansible/playbooks/dns.yaml' on the Ansible Controller.\nIf you are using a module and expect the file to exist on the remote, see the remote_src option: [Errno 2] No such file or directory: '/Users/hamid/ansible/playbooks/dns.yaml'"}
+2026-08-25 17:38:47,673 p=23654 u=hamid n=ansible INFO| fatal: [master1]: FAILED! => {"changed": false, "include": "dns.yaml", "reason": "Could not find or access '/Users/hamid/ansible/playbooks/dns.yaml' on the Ansible Controller: Unable to retrieve file contents.\nCould not find or access '/Users/hamid/ansible/playbooks/dns.yaml' on the Ansible Controller.\nIf you are using a module and expect the file to exist on the remote, see the remote_src option: [Errno 2] No such file or directory: '/Users/hamid/ansible/playbooks/dns.yaml'"}
+2026-08-25 17:38:47,674 p=23654 u=hamid n=ansible INFO| PLAY RECAP *************************************************************************************************************************************
+2026-08-25 17:38:47,674 p=23654 u=hamid n=ansible INFO| master1                    : ok=3    changed=1    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+2026-08-25 17:38:47,674 p=23654 u=hamid n=ansible INFO| worker1                    : ok=3    changed=1    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+2026-08-25 17:40:55,846 p=23877 u=hamid n=ansible INFO| PLAY [use task common] *************************************************************************************************************************
+2026-08-25 17:40:55,855 p=23877 u=hamid n=ansible INFO| TASK [Gathering Facts] *************************************************************************************************************************
+2026-08-25 17:40:59,217 p=23877 u=hamid n=ansible WARNING| [WARNING]: Host 'master1' is using the discovered Python interpreter at '/usr/bin/python3.10', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+
+2026-08-25 17:40:59,217 p=23877 u=hamid n=ansible INFO| ok: [master1]
+2026-08-25 17:40:59,223 p=23877 u=hamid n=ansible WARNING| [WARNING]: Host 'worker1' is using the discovered Python interpreter at '/usr/bin/python3.10', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+
+2026-08-25 17:40:59,224 p=23877 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-25 17:40:59,229 p=23877 u=hamid n=ansible INFO| TASK [pre-setup : delete user] *****************************************************************************************************************
+2026-08-25 17:40:59,258 p=23877 u=hamid n=ansible INFO| included: /Users/hamid/ansible/roles/pre-setup/tasks/delete_user.yml for worker1, master1
+2026-08-25 17:40:59,262 p=23877 u=hamid n=ansible INFO| TASK [pre-setup : cute user] *******************************************************************************************************************
+2026-08-25 17:41:00,313 p=23877 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-25 17:41:00,370 p=23877 u=hamid n=ansible INFO| changed: [master1]
+2026-08-25 17:41:00,379 p=23877 u=hamid n=ansible INFO| TASK [pre-setup : delete users] ****************************************************************************************************************
+2026-08-25 17:41:00,402 p=23877 u=hamid n=ansible INFO| skipping: [worker1] => (item=ubuntu) 
+2026-08-25 17:41:00,404 p=23877 u=hamid n=ansible INFO| skipping: [worker1]
+2026-08-25 17:41:00,409 p=23877 u=hamid n=ansible INFO| skipping: [master1] => (item=ubuntu) 
+2026-08-25 17:41:00,409 p=23877 u=hamid n=ansible INFO| skipping: [master1]
+2026-08-25 17:41:00,414 p=23877 u=hamid n=ansible INFO| TASK [pre-setup : dns config] ******************************************************************************************************************
+2026-08-25 17:41:00,440 p=23877 u=hamid n=ansible INFO| included: /Users/hamid/ansible/roles/pre-setup/tasks/dns.yml for worker1, master1
+2026-08-25 17:41:00,443 p=23877 u=hamid n=ansible INFO| TASK [pre-setup : delete /etc/resolv.conf] *****************************************************************************************************
+2026-08-25 17:41:01,605 p=23877 u=hamid n=ansible INFO| changed: [master1]
+2026-08-25 17:41:01,609 p=23877 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-25 17:41:01,618 p=23877 u=hamid n=ansible INFO| TASK [pre-setup : crate /etc/resolv.conf] ******************************************************************************************************
+2026-08-25 17:41:04,042 p=23877 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-25 17:41:04,047 p=23877 u=hamid n=ansible INFO| changed: [master1]
+2026-08-25 17:41:04,054 p=23877 u=hamid n=ansible INFO| TASK [pre-setup : Update and Upgrade] **********************************************************************************************************
+2026-08-25 17:46:24,050 p=23877 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-25 17:46:41,040 p=23877 u=hamid n=ansible INFO| changed: [master1]
+2026-08-25 17:46:41,051 p=23877 u=hamid n=ansible INFO| TASK [pre-setup : Disable Automate Update] *****************************************************************************************************
+2026-08-25 17:46:44,438 p=23877 u=hamid n=ansible INFO| changed: [master1]
+2026-08-25 17:46:44,478 p=23877 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-25 17:46:44,485 p=23877 u=hamid n=ansible INFO| TASK [pre-setup : create user] *****************************************************************************************************************
+2026-08-25 17:46:46,312 p=23877 u=hamid n=ansible INFO| changed: [worker1] => (item={'name': 'ali', 'username': 'ali', 'shell': '/bin/bash', 'groups': 'root'})
+2026-08-25 17:46:46,394 p=23877 u=hamid n=ansible INFO| changed: [master1] => (item={'name': 'ali', 'username': 'ali', 'shell': '/bin/bash', 'groups': 'root'})
+2026-08-25 17:46:47,920 p=23877 u=hamid n=ansible INFO| changed: [worker1] => (item={'name': 'hamed', 'username': 'hamed', 'shell': '/bin/bash', 'groups': 'root'})
+2026-08-25 17:46:48,065 p=23877 u=hamid n=ansible INFO| changed: [master1] => (item={'name': 'hamed', 'username': 'hamed', 'shell': '/bin/bash', 'groups': 'root'})
+2026-08-25 17:46:48,074 p=23877 u=hamid n=ansible INFO| TASK [pre-setup : Set timezone to Asia/Tokyo] **************************************************************************************************
+2026-08-25 17:46:49,690 p=23877 u=hamid n=ansible INFO| changed: [master1]
+2026-08-25 17:46:49,690 p=23877 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-25 17:46:49,696 p=23877 u=hamid n=ansible INFO| TASK [pre-setup : Set a hostname] **************************************************************************************************************
+2026-08-25 17:46:52,203 p=23877 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-25 17:46:52,284 p=23877 u=hamid n=ansible INFO| changed: [master1]
+2026-08-25 17:46:52,290 p=23877 u=hamid n=ansible INFO| TASK [pre-setup : apps] ************************************************************************************************************************
+2026-08-25 17:46:52,340 p=23877 u=hamid n=ansible ERROR| [ERROR]: Could not find or access '/Users/hamid/ansible/playbooks/apps.yaml' on the Ansible Controller: Unable to retrieve file contents.
+Could not find or access '/Users/hamid/ansible/playbooks/apps.yaml' on the Ansible Controller.
+If you are using a module and expect the file to exist on the remote, see the remote_src option: [Errno 2] No such file or directory: '/Users/hamid/ansible/playbooks/apps.yaml'
+
+
+2026-08-25 17:46:52,340 p=23877 u=hamid n=ansible INFO| fatal: [worker1]: FAILED! => {"changed": false, "include": "apps.yaml", "reason": "Could not find or access '/Users/hamid/ansible/playbooks/apps.yaml' on the Ansible Controller: Unable to retrieve file contents.\nCould not find or access '/Users/hamid/ansible/playbooks/apps.yaml' on the Ansible Controller.\nIf you are using a module and expect the file to exist on the remote, see the remote_src option: [Errno 2] No such file or directory: '/Users/hamid/ansible/playbooks/apps.yaml'"}
+2026-08-25 17:46:52,341 p=23877 u=hamid n=ansible INFO| fatal: [master1]: FAILED! => {"changed": false, "include": "apps.yaml", "reason": "Could not find or access '/Users/hamid/ansible/playbooks/apps.yaml' on the Ansible Controller: Unable to retrieve file contents.\nCould not find or access '/Users/hamid/ansible/playbooks/apps.yaml' on the Ansible Controller.\nIf you are using a module and expect the file to exist on the remote, see the remote_src option: [Errno 2] No such file or directory: '/Users/hamid/ansible/playbooks/apps.yaml'"}
+2026-08-25 17:46:52,341 p=23877 u=hamid n=ansible INFO| PLAY RECAP *************************************************************************************************************************************
+2026-08-25 17:46:52,341 p=23877 u=hamid n=ansible INFO| master1                    : ok=11   changed=8    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+2026-08-25 17:46:52,341 p=23877 u=hamid n=ansible INFO| worker1                    : ok=11   changed=8    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+2026-08-25 17:48:05,079 p=24376 u=hamid n=ansible INFO| PLAY [use task common] *************************************************************************************************************************
+2026-08-25 17:48:05,086 p=24376 u=hamid n=ansible INFO| TASK [Gathering Facts] *************************************************************************************************************************
+2026-08-25 17:48:09,410 p=24376 u=hamid n=ansible WARNING| [WARNING]: Host 'worker1' is using the discovered Python interpreter at '/usr/bin/python3.10', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+
+2026-08-25 17:48:09,411 p=24376 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-25 17:48:09,633 p=24376 u=hamid n=ansible WARNING| [WARNING]: Host 'master1' is using the discovered Python interpreter at '/usr/bin/python3.10', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+
+2026-08-25 17:48:09,634 p=24376 u=hamid n=ansible INFO| ok: [master1]
+2026-08-25 17:48:09,637 p=24376 u=hamid n=ansible INFO| TASK [pre-setup : delete user] *****************************************************************************************************************
+2026-08-25 17:48:09,658 p=24376 u=hamid n=ansible INFO| included: /Users/hamid/ansible/roles/pre-setup/tasks/delete_user.yml for worker1, master1
+2026-08-25 17:48:09,660 p=24376 u=hamid n=ansible INFO| TASK [pre-setup : cute user] *******************************************************************************************************************
+2026-08-25 17:48:10,715 p=24376 u=hamid n=ansible INFO| changed: [master1]
+2026-08-25 17:48:10,826 p=24376 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-25 17:48:10,833 p=24376 u=hamid n=ansible INFO| TASK [pre-setup : delete users] ****************************************************************************************************************
+2026-08-25 17:48:10,858 p=24376 u=hamid n=ansible INFO| skipping: [worker1] => (item=ubuntu) 
+2026-08-25 17:48:10,859 p=24376 u=hamid n=ansible INFO| skipping: [worker1] => (item=ali) 
+2026-08-25 17:48:10,862 p=24376 u=hamid n=ansible INFO| skipping: [worker1] => (item=hamed) 
+2026-08-25 17:48:10,862 p=24376 u=hamid n=ansible INFO| skipping: [worker1]
+2026-08-25 17:48:10,864 p=24376 u=hamid n=ansible INFO| skipping: [master1] => (item=ubuntu) 
+2026-08-25 17:48:10,867 p=24376 u=hamid n=ansible INFO| skipping: [master1] => (item=ali) 
+2026-08-25 17:48:10,869 p=24376 u=hamid n=ansible INFO| skipping: [master1] => (item=hamed) 
+2026-08-25 17:48:10,870 p=24376 u=hamid n=ansible INFO| skipping: [master1]
+2026-08-25 17:48:10,874 p=24376 u=hamid n=ansible INFO| TASK [pre-setup : dns config] ******************************************************************************************************************
+2026-08-25 17:48:10,899 p=24376 u=hamid n=ansible INFO| included: /Users/hamid/ansible/roles/pre-setup/tasks/dns.yml for worker1, master1
+2026-08-25 17:48:10,901 p=24376 u=hamid n=ansible INFO| TASK [pre-setup : delete /etc/resolv.conf] *****************************************************************************************************
+2026-08-25 17:48:11,967 p=24376 u=hamid n=ansible INFO| changed: [master1]
+2026-08-25 17:48:12,160 p=24376 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-25 17:48:12,171 p=24376 u=hamid n=ansible INFO| TASK [pre-setup : crate /etc/resolv.conf] ******************************************************************************************************
+2026-08-25 17:48:13,896 p=24376 u=hamid n=ansible INFO| changed: [master1]
+2026-08-25 17:48:14,363 p=24376 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-25 17:48:14,370 p=24376 u=hamid n=ansible INFO| TASK [pre-setup : Update and Upgrade] **********************************************************************************************************
+2026-08-25 17:48:20,193 p=24376 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-25 17:48:20,566 p=24376 u=hamid n=ansible INFO| ok: [master1]
+2026-08-25 17:48:20,574 p=24376 u=hamid n=ansible INFO| TASK [pre-setup : Disable Automate Update] *****************************************************************************************************
+2026-08-25 17:48:22,347 p=24376 u=hamid n=ansible INFO| ok: [master1]
+2026-08-25 17:48:22,674 p=24376 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-25 17:48:22,681 p=24376 u=hamid n=ansible INFO| TASK [pre-setup : create user] *****************************************************************************************************************
+2026-08-25 17:48:23,839 p=24376 u=hamid n=ansible INFO| ok: [master1] => (item={'name': 'ali', 'username': 'ali', 'shell': '/bin/bash', 'groups': 'root'})
+2026-08-25 17:48:24,161 p=24376 u=hamid n=ansible INFO| ok: [worker1] => (item={'name': 'ali', 'username': 'ali', 'shell': '/bin/bash', 'groups': 'root'})
+2026-08-25 17:48:24,902 p=24376 u=hamid n=ansible INFO| ok: [master1] => (item={'name': 'hamed', 'username': 'hamed', 'shell': '/bin/bash', 'groups': 'root'})
+2026-08-25 17:48:25,443 p=24376 u=hamid n=ansible INFO| ok: [worker1] => (item={'name': 'hamed', 'username': 'hamed', 'shell': '/bin/bash', 'groups': 'root'})
+2026-08-25 17:48:25,451 p=24376 u=hamid n=ansible INFO| TASK [pre-setup : Set timezone to Asia/Tokyo] **************************************************************************************************
+2026-08-25 17:48:26,725 p=24376 u=hamid n=ansible INFO| ok: [master1]
+2026-08-25 17:48:26,747 p=24376 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-25 17:48:26,752 p=24376 u=hamid n=ansible INFO| TASK [pre-setup : Set a hostname] **************************************************************************************************************
+2026-08-25 17:48:28,511 p=24376 u=hamid n=ansible INFO| ok: [master1]
+2026-08-25 17:48:28,696 p=24376 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-25 17:48:28,703 p=24376 u=hamid n=ansible INFO| TASK [pre-setup : apps] ************************************************************************************************************************
+2026-08-25 17:48:28,765 p=24376 u=hamid n=ansible ERROR| [ERROR]: Could not find or access '/Users/hamid/ansible/playbooks/Install_apps.yml' on the Ansible Controller: Unable to retrieve file contents.
+Could not find or access '/Users/hamid/ansible/playbooks/Install_apps.yml' on the Ansible Controller.
+If you are using a module and expect the file to exist on the remote, see the remote_src option: [Errno 2] No such file or directory: '/Users/hamid/ansible/playbooks/Install_apps.yml'
+
+
+2026-08-25 17:48:28,765 p=24376 u=hamid n=ansible INFO| fatal: [worker1]: FAILED! => {"changed": false, "include": "Install_apps.yml", "reason": "Could not find or access '/Users/hamid/ansible/playbooks/Install_apps.yml' on the Ansible Controller: Unable to retrieve file contents.\nCould not find or access '/Users/hamid/ansible/playbooks/Install_apps.yml' on the Ansible Controller.\nIf you are using a module and expect the file to exist on the remote, see the remote_src option: [Errno 2] No such file or directory: '/Users/hamid/ansible/playbooks/Install_apps.yml'"}
+2026-08-25 17:48:28,765 p=24376 u=hamid n=ansible INFO| fatal: [master1]: FAILED! => {"changed": false, "include": "Install_apps.yml", "reason": "Could not find or access '/Users/hamid/ansible/playbooks/Install_apps.yml' on the Ansible Controller: Unable to retrieve file contents.\nCould not find or access '/Users/hamid/ansible/playbooks/Install_apps.yml' on the Ansible Controller.\nIf you are using a module and expect the file to exist on the remote, see the remote_src option: [Errno 2] No such file or directory: '/Users/hamid/ansible/playbooks/Install_apps.yml'"}
+2026-08-25 17:48:28,766 p=24376 u=hamid n=ansible INFO| PLAY RECAP *************************************************************************************************************************************
+2026-08-25 17:48:28,766 p=24376 u=hamid n=ansible INFO| master1                    : ok=11   changed=3    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+2026-08-25 17:48:28,766 p=24376 u=hamid n=ansible INFO| worker1                    : ok=11   changed=3    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+2026-08-25 17:49:01,094 p=24721 u=hamid n=ansible INFO| PLAY [use task common] *************************************************************************************************************************
+2026-08-25 17:49:01,101 p=24721 u=hamid n=ansible INFO| TASK [Gathering Facts] *************************************************************************************************************************
+2026-08-25 17:49:03,314 p=24721 u=hamid n=ansible WARNING| [WARNING]: Host 'master1' is using the discovered Python interpreter at '/usr/bin/python3.10', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+
+2026-08-25 17:49:03,314 p=24721 u=hamid n=ansible INFO| ok: [master1]
+2026-08-25 17:49:03,501 p=24721 u=hamid n=ansible WARNING| [WARNING]: Host 'worker1' is using the discovered Python interpreter at '/usr/bin/python3.10', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+
+2026-08-25 17:49:03,501 p=24721 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-25 17:49:03,506 p=24721 u=hamid n=ansible INFO| TASK [pre-setup : delete user] *****************************************************************************************************************
+2026-08-25 17:49:03,536 p=24721 u=hamid n=ansible INFO| included: /Users/hamid/ansible/roles/pre-setup/tasks/delete_user.yml for worker1, master1
+2026-08-25 17:49:03,540 p=24721 u=hamid n=ansible INFO| TASK [pre-setup : cute user] *******************************************************************************************************************
+2026-08-25 17:49:04,592 p=24721 u=hamid n=ansible INFO| changed: [master1]
+2026-08-25 17:49:04,864 p=24721 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-25 17:49:04,872 p=24721 u=hamid n=ansible INFO| TASK [pre-setup : delete users] ****************************************************************************************************************
+2026-08-25 17:49:04,898 p=24721 u=hamid n=ansible INFO| skipping: [worker1] => (item=ubuntu) 
+2026-08-25 17:49:04,899 p=24721 u=hamid n=ansible INFO| skipping: [worker1] => (item=ali) 
+2026-08-25 17:49:04,902 p=24721 u=hamid n=ansible INFO| skipping: [worker1] => (item=hamed) 
+2026-08-25 17:49:04,904 p=24721 u=hamid n=ansible INFO| skipping: [worker1]
+2026-08-25 17:49:04,905 p=24721 u=hamid n=ansible INFO| skipping: [master1] => (item=ubuntu) 
+2026-08-25 17:49:04,907 p=24721 u=hamid n=ansible INFO| skipping: [master1] => (item=ali) 
+2026-08-25 17:49:04,909 p=24721 u=hamid n=ansible INFO| skipping: [master1] => (item=hamed) 
+2026-08-25 17:49:04,910 p=24721 u=hamid n=ansible INFO| skipping: [master1]
+2026-08-25 17:49:04,914 p=24721 u=hamid n=ansible INFO| TASK [pre-setup : dns config] ******************************************************************************************************************
+2026-08-25 17:49:04,939 p=24721 u=hamid n=ansible INFO| included: /Users/hamid/ansible/roles/pre-setup/tasks/dns.yml for worker1, master1
+2026-08-25 17:49:04,941 p=24721 u=hamid n=ansible INFO| TASK [pre-setup : delete /etc/resolv.conf] *****************************************************************************************************
+2026-08-25 17:49:05,943 p=24721 u=hamid n=ansible INFO| changed: [master1]
+2026-08-25 17:49:06,329 p=24721 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-25 17:49:06,340 p=24721 u=hamid n=ansible INFO| TASK [pre-setup : crate /etc/resolv.conf] ******************************************************************************************************
+2026-08-25 17:49:08,273 p=24721 u=hamid n=ansible INFO| changed: [master1]
+2026-08-25 17:49:08,701 p=24721 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-25 17:49:08,709 p=24721 u=hamid n=ansible INFO| TASK [pre-setup : Update and Upgrade] **********************************************************************************************************
+2026-08-25 17:49:15,001 p=24721 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-25 17:49:15,124 p=24721 u=hamid n=ansible INFO| ok: [master1]
+2026-08-25 17:49:15,132 p=24721 u=hamid n=ansible INFO| TASK [pre-setup : Disable Automate Update] *****************************************************************************************************
+2026-08-25 17:49:16,922 p=24721 u=hamid n=ansible INFO| ok: [master1]
+2026-08-25 17:49:17,374 p=24721 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-25 17:49:17,382 p=24721 u=hamid n=ansible INFO| TASK [pre-setup : create user] *****************************************************************************************************************
+2026-08-25 17:49:18,522 p=24721 u=hamid n=ansible INFO| ok: [master1] => (item={'name': 'ali', 'username': 'ali', 'shell': '/bin/bash', 'groups': 'root'})
+2026-08-25 17:49:18,872 p=24721 u=hamid n=ansible INFO| ok: [worker1] => (item={'name': 'ali', 'username': 'ali', 'shell': '/bin/bash', 'groups': 'root'})
+2026-08-25 17:49:19,615 p=24721 u=hamid n=ansible INFO| ok: [master1] => (item={'name': 'hamed', 'username': 'hamed', 'shell': '/bin/bash', 'groups': 'root'})
+2026-08-25 17:49:20,038 p=24721 u=hamid n=ansible INFO| ok: [worker1] => (item={'name': 'hamed', 'username': 'hamed', 'shell': '/bin/bash', 'groups': 'root'})
+2026-08-25 17:49:20,046 p=24721 u=hamid n=ansible INFO| TASK [pre-setup : Set timezone to Asia/Tokyo] **************************************************************************************************
+2026-08-25 17:49:21,222 p=24721 u=hamid n=ansible INFO| ok: [master1]
+2026-08-25 17:49:21,461 p=24721 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-25 17:49:21,469 p=24721 u=hamid n=ansible INFO| TASK [pre-setup : Set a hostname] **************************************************************************************************************
+2026-08-25 17:49:23,208 p=24721 u=hamid n=ansible INFO| ok: [master1]
+2026-08-25 17:49:23,368 p=24721 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-25 17:49:23,374 p=24721 u=hamid n=ansible INFO| TASK [pre-setup : apps] ************************************************************************************************************************
+2026-08-25 17:49:23,434 p=24721 u=hamid n=ansible INFO| included: /Users/hamid/ansible/roles/pre-setup/tasks/install-apps.yml for worker1, master1
+2026-08-25 17:49:23,436 p=24721 u=hamid n=ansible INFO| TASK [pre-setup : Install Package] *************************************************************************************************************
+2026-08-25 17:49:51,333 p=24721 u=hamid n=ansible INFO| changed: [master1] => (item={'name': 'mtr'})
+2026-08-25 17:49:51,341 p=24721 u=hamid n=ansible INFO| changed: [worker1] => (item={'name': 'mtr'})
+2026-08-25 17:50:01,263 p=24721 u=hamid n=ansible INFO| changed: [worker1] => (item={'name': 'tree'})
+2026-08-25 17:50:01,460 p=24721 u=hamid n=ansible INFO| changed: [master1] => (item={'name': 'tree'})
+2026-08-25 17:50:03,911 p=24721 u=hamid n=ansible INFO| ok: [master1] => (item={'name': 'htop'})
+2026-08-25 17:50:04,112 p=24721 u=hamid n=ansible INFO| ok: [worker1] => (item={'name': 'htop'})
+2026-08-25 17:50:04,125 p=24721 u=hamid n=ansible INFO| TASK [pre-setup : Set permission directory] ****************************************************************************************************
+2026-08-25 17:50:04,155 p=24721 u=hamid n=ansible ERROR| [ERROR]: Could not find or access '/Users/hamid/ansible/playbooks/permission_directory.yaml' on the Ansible Controller: Unable to retrieve file contents.
+Could not find or access '/Users/hamid/ansible/playbooks/permission_directory.yaml' on the Ansible Controller.
+If you are using a module and expect the file to exist on the remote, see the remote_src option: [Errno 2] No such file or directory: '/Users/hamid/ansible/playbooks/permission_directory.yaml'
+
+
+2026-08-25 17:50:04,156 p=24721 u=hamid n=ansible INFO| fatal: [worker1]: FAILED! => {"changed": false, "include": "permission_directory.yaml", "reason": "Could not find or access '/Users/hamid/ansible/playbooks/permission_directory.yaml' on the Ansible Controller: Unable to retrieve file contents.\nCould not find or access '/Users/hamid/ansible/playbooks/permission_directory.yaml' on the Ansible Controller.\nIf you are using a module and expect the file to exist on the remote, see the remote_src option: [Errno 2] No such file or directory: '/Users/hamid/ansible/playbooks/permission_directory.yaml'"}
+2026-08-25 17:50:04,156 p=24721 u=hamid n=ansible INFO| fatal: [master1]: FAILED! => {"changed": false, "include": "permission_directory.yaml", "reason": "Could not find or access '/Users/hamid/ansible/playbooks/permission_directory.yaml' on the Ansible Controller: Unable to retrieve file contents.\nCould not find or access '/Users/hamid/ansible/playbooks/permission_directory.yaml' on the Ansible Controller.\nIf you are using a module and expect the file to exist on the remote, see the remote_src option: [Errno 2] No such file or directory: '/Users/hamid/ansible/playbooks/permission_directory.yaml'"}
+2026-08-25 17:50:04,157 p=24721 u=hamid n=ansible INFO| PLAY RECAP *************************************************************************************************************************************
+2026-08-25 17:50:04,157 p=24721 u=hamid n=ansible INFO| master1                    : ok=13   changed=4    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+2026-08-25 17:50:04,157 p=24721 u=hamid n=ansible INFO| worker1                    : ok=13   changed=4    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+2026-08-25 17:50:48,213 p=25117 u=hamid n=ansible INFO| PLAY [use task common] *************************************************************************************************************************
+2026-08-25 17:50:48,221 p=25117 u=hamid n=ansible INFO| TASK [Gathering Facts] *************************************************************************************************************************
+2026-08-25 17:50:50,303 p=25117 u=hamid n=ansible WARNING| [WARNING]: Host 'master1' is using the discovered Python interpreter at '/usr/bin/python3.10', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+
+2026-08-25 17:50:50,304 p=25117 u=hamid n=ansible INFO| ok: [master1]
+2026-08-25 17:50:50,636 p=25117 u=hamid n=ansible WARNING| [WARNING]: Host 'worker1' is using the discovered Python interpreter at '/usr/bin/python3.10', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+
+2026-08-25 17:50:50,637 p=25117 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-25 17:50:50,642 p=25117 u=hamid n=ansible INFO| TASK [pre-setup : delete user] *****************************************************************************************************************
+2026-08-25 17:50:50,673 p=25117 u=hamid n=ansible INFO| included: /Users/hamid/ansible/roles/pre-setup/tasks/delete_user.yml for worker1, master1
+2026-08-25 17:50:50,677 p=25117 u=hamid n=ansible INFO| TASK [pre-setup : cute user] *******************************************************************************************************************
+2026-08-25 17:50:51,655 p=25117 u=hamid n=ansible INFO| changed: [master1]
+2026-08-25 17:50:51,853 p=25117 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-25 17:50:51,861 p=25117 u=hamid n=ansible INFO| TASK [pre-setup : delete users] ****************************************************************************************************************
+2026-08-25 17:50:51,886 p=25117 u=hamid n=ansible INFO| skipping: [worker1] => (item=ubuntu) 
+2026-08-25 17:50:51,887 p=25117 u=hamid n=ansible INFO| skipping: [worker1] => (item=ali) 
+2026-08-25 17:50:51,890 p=25117 u=hamid n=ansible INFO| skipping: [worker1] => (item=hamed) 
+2026-08-25 17:50:51,890 p=25117 u=hamid n=ansible INFO| skipping: [worker1]
+2026-08-25 17:50:51,892 p=25117 u=hamid n=ansible INFO| skipping: [master1] => (item=ubuntu) 
+2026-08-25 17:50:51,894 p=25117 u=hamid n=ansible INFO| skipping: [master1] => (item=ali) 
+2026-08-25 17:50:51,896 p=25117 u=hamid n=ansible INFO| skipping: [master1] => (item=hamed) 
+2026-08-25 17:50:51,897 p=25117 u=hamid n=ansible INFO| skipping: [master1]
+2026-08-25 17:50:51,901 p=25117 u=hamid n=ansible INFO| TASK [pre-setup : dns config] ******************************************************************************************************************
+2026-08-25 17:50:51,927 p=25117 u=hamid n=ansible INFO| included: /Users/hamid/ansible/roles/pre-setup/tasks/dns.yml for worker1, master1
+2026-08-25 17:50:51,929 p=25117 u=hamid n=ansible INFO| TASK [pre-setup : delete /etc/resolv.conf] *****************************************************************************************************
+2026-08-25 17:50:52,932 p=25117 u=hamid n=ansible INFO| changed: [master1]
+2026-08-25 17:50:53,104 p=25117 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-25 17:50:53,112 p=25117 u=hamid n=ansible INFO| TASK [pre-setup : crate /etc/resolv.conf] ******************************************************************************************************
+2026-08-25 17:50:54,776 p=25117 u=hamid n=ansible INFO| changed: [master1]
+2026-08-25 17:50:55,334 p=25117 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-25 17:50:55,341 p=25117 u=hamid n=ansible INFO| TASK [pre-setup : Update and Upgrade] **********************************************************************************************************
+2026-08-25 17:51:01,140 p=25117 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-25 17:51:01,412 p=25117 u=hamid n=ansible INFO| ok: [master1]
+2026-08-25 17:51:01,419 p=25117 u=hamid n=ansible INFO| TASK [pre-setup : Disable Automate Update] *****************************************************************************************************
+2026-08-25 17:51:03,177 p=25117 u=hamid n=ansible INFO| ok: [master1]
+2026-08-25 17:51:03,623 p=25117 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-25 17:51:03,631 p=25117 u=hamid n=ansible INFO| TASK [pre-setup : create user] *****************************************************************************************************************
+2026-08-25 17:51:04,767 p=25117 u=hamid n=ansible INFO| ok: [master1] => (item={'name': 'ali', 'username': 'ali', 'shell': '/bin/bash', 'groups': 'root'})
+2026-08-25 17:51:04,950 p=25117 u=hamid n=ansible INFO| ok: [worker1] => (item={'name': 'ali', 'username': 'ali', 'shell': '/bin/bash', 'groups': 'root'})
+2026-08-25 17:51:05,795 p=25117 u=hamid n=ansible INFO| ok: [master1] => (item={'name': 'hamed', 'username': 'hamed', 'shell': '/bin/bash', 'groups': 'root'})
+2026-08-25 17:51:06,240 p=25117 u=hamid n=ansible INFO| ok: [worker1] => (item={'name': 'hamed', 'username': 'hamed', 'shell': '/bin/bash', 'groups': 'root'})
+2026-08-25 17:51:06,250 p=25117 u=hamid n=ansible INFO| TASK [pre-setup : Set timezone to Asia/Tokyo] **************************************************************************************************
+2026-08-25 17:51:07,412 p=25117 u=hamid n=ansible INFO| ok: [master1]
+2026-08-25 17:51:07,559 p=25117 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-25 17:51:07,568 p=25117 u=hamid n=ansible INFO| TASK [pre-setup : Set a hostname] **************************************************************************************************************
+2026-08-25 17:51:09,370 p=25117 u=hamid n=ansible INFO| ok: [master1]
+2026-08-25 17:51:09,451 p=25117 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-25 17:51:09,458 p=25117 u=hamid n=ansible INFO| TASK [pre-setup : apps] ************************************************************************************************************************
+2026-08-25 17:51:09,516 p=25117 u=hamid n=ansible INFO| included: /Users/hamid/ansible/roles/pre-setup/tasks/install-apps.yml for worker1, master1
+2026-08-25 17:51:09,519 p=25117 u=hamid n=ansible INFO| TASK [pre-setup : Install Package] *************************************************************************************************************
+2026-08-25 17:51:12,057 p=25117 u=hamid n=ansible INFO| ok: [master1] => (item={'name': 'mtr'})
+2026-08-25 17:51:12,061 p=25117 u=hamid n=ansible INFO| ok: [worker1] => (item={'name': 'mtr'})
+2026-08-25 17:51:14,631 p=25117 u=hamid n=ansible INFO| ok: [master1] => (item={'name': 'tree'})
+2026-08-25 17:51:14,735 p=25117 u=hamid n=ansible INFO| ok: [worker1] => (item={'name': 'tree'})
+2026-08-25 17:51:17,054 p=25117 u=hamid n=ansible INFO| ok: [master1] => (item={'name': 'htop'})
+2026-08-25 17:51:17,508 p=25117 u=hamid n=ansible INFO| ok: [worker1] => (item={'name': 'htop'})
+2026-08-25 17:51:17,518 p=25117 u=hamid n=ansible INFO| TASK [pre-setup : Set permission directory] ****************************************************************************************************
+2026-08-25 17:51:17,550 p=25117 u=hamid n=ansible INFO| included: /Users/hamid/ansible/roles/pre-setup/tasks/permission_directory.yml for worker1, master1
+2026-08-25 17:51:17,553 p=25117 u=hamid n=ansible INFO| TASK [pre-setup : permission directory] ********************************************************************************************************
+2026-08-25 17:51:18,474 p=25117 u=hamid n=ansible INFO| ok: [master1] => (item={'path': '/etc/passwd', 'owner': 'root', 'group': 'root', 'mode': '0644'})
+2026-08-25 17:51:18,580 p=25117 u=hamid n=ansible INFO| ok: [worker1] => (item={'path': '/etc/passwd', 'owner': 'root', 'group': 'root', 'mode': '0644'})
+2026-08-25 17:51:19,439 p=25117 u=hamid n=ansible INFO| ok: [master1] => (item={'path': '/etc/shadow', 'owner': 'root', 'group': 'shadow', 'mode': '0640'})
+2026-08-25 17:51:19,794 p=25117 u=hamid n=ansible INFO| ok: [worker1] => (item={'path': '/etc/shadow', 'owner': 'root', 'group': 'shadow', 'mode': '0640'})
+2026-08-25 17:51:20,396 p=25117 u=hamid n=ansible INFO| ok: [master1] => (item={'path': '/etc/gshadow', 'owner': 'root', 'group': 'shadow', 'mode': '0640'})
+2026-08-25 17:51:20,907 p=25117 u=hamid n=ansible INFO| ok: [worker1] => (item={'path': '/etc/gshadow', 'owner': 'root', 'group': 'shadow', 'mode': '0640'})
+2026-08-25 17:51:21,311 p=25117 u=hamid n=ansible INFO| ok: [master1] => (item={'path': '/etc/group', 'owner': 'root', 'group': 'root', 'mode': '0644'})
+2026-08-25 17:51:22,104 p=25117 u=hamid n=ansible INFO| ok: [worker1] => (item={'path': '/etc/group', 'owner': 'root', 'group': 'root', 'mode': '0644'})
+2026-08-25 17:51:22,274 p=25117 u=hamid n=ansible INFO| ok: [master1] => (item={'path': '/etc/sudoers', 'owner': 'root', 'group': 'root', 'mode': '0440'})
+2026-08-25 17:51:23,207 p=25117 u=hamid n=ansible INFO| changed: [master1] => (item={'path': '/var/log/auth.log', 'owner': 'root', 'group': 'adm', 'mode': '0640'})
+2026-08-25 17:51:23,221 p=25117 u=hamid n=ansible INFO| ok: [worker1] => (item={'path': '/etc/sudoers', 'owner': 'root', 'group': 'root', 'mode': '0440'})
+2026-08-25 17:51:24,082 p=25117 u=hamid n=ansible INFO| changed: [master1] => (item={'path': '/etc/ssh/sshd_config', 'owner': 'root', 'group': 'root', 'mode': '0600'})
+2026-08-25 17:51:24,388 p=25117 u=hamid n=ansible INFO| changed: [worker1] => (item={'path': '/var/log/auth.log', 'owner': 'root', 'group': 'adm', 'mode': '0640'})
+2026-08-25 17:51:24,991 p=25117 u=hamid n=ansible INFO| ok: [master1] => (item={'path': '/etc/ssh/ssh_config', 'owner': 'root', 'group': 'root', 'mode': '0644'})
+2026-08-25 17:51:25,645 p=25117 u=hamid n=ansible INFO| changed: [worker1] => (item={'path': '/etc/ssh/sshd_config', 'owner': 'root', 'group': 'root', 'mode': '0600'})
+2026-08-25 17:51:25,904 p=25117 u=hamid n=ansible INFO| changed: [master1] => (item={'path': '/boot/grub/grub.cfg', 'owner': 'root', 'group': 'root', 'mode': '0600'})
+2026-08-25 17:51:26,780 p=25117 u=hamid n=ansible INFO| ok: [worker1] => (item={'path': '/etc/ssh/ssh_config', 'owner': 'root', 'group': 'root', 'mode': '0644'})
+2026-08-25 17:51:28,027 p=25117 u=hamid n=ansible INFO| changed: [worker1] => (item={'path': '/boot/grub/grub.cfg', 'owner': 'root', 'group': 'root', 'mode': '0600'})
+2026-08-25 17:51:28,040 p=25117 u=hamid n=ansible INFO| PLAY RECAP *************************************************************************************************************************************
+2026-08-25 17:51:28,040 p=25117 u=hamid n=ansible INFO| master1                    : ok=15   changed=4    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+2026-08-25 17:51:28,040 p=25117 u=hamid n=ansible INFO| worker1                    : ok=15   changed=4    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   

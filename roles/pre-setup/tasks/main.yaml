@@ -2,7 +2,7 @@
   include_tasks: delete_user.yml
 
 - name: dns config
-  include_tasks: dns.yaml
+  include_tasks: dns.yml
 
 - name: Update and Upgrade
   apt:
@@ -33,7 +33,7 @@
     name: pc1
 
 - name: apps
-  include_tasks: apps.yaml
+  include_tasks: install-apps.yml
 
 - name: Set permission directory
-  include_tasks: permission_directory.yaml 
+  include_tasks: permission_directory.yml 
