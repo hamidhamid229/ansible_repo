@@ -1,5 +1,5 @@
 - name: delete user
-  include_tasks: delete-user.yaml
+  include_tasks: delete_user.yml
 
 - name: dns config
   include_tasks: dns.yaml

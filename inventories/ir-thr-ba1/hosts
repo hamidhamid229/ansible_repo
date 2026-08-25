@@ -1,0 +1,9 @@
+[workers]
+worker1
+
+[masters]
+master1 
+
+[all:children]
+workers
+masters
