@@ -3,7 +3,7 @@
 ## Clone Repository
 
 ```bash
-gh repo clone hamidhamid229/ansible_repo
+git clone https://github.com/hamidhamid229/ansible_repo.git
 cd ansible_repo
 ```
 
