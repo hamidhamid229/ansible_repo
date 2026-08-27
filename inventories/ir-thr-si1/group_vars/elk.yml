@@ -1,0 +1,26 @@
+---
+elk_version: "9.4.4"
+
+elk_base_dir: "/opt/elk"
+
+elk_elasticsearch_container_name: "elasticsearch"
+elk_kibana_container_name: "kibana"
+elk_logstash_container_name: "logstash"
+
+elk_elasticsearch_port: 9200
+elk_kibana_port: 5601
+elk_logstash_port: 5000
+elk_logstash_beats_port: 5044
+
+elk_elasticsearch_java_opts: "-Xms1g -Xmx1g"
+
+elk_elastic_password: "MyElasticPassword123!"
+
+elk_kibana_service_token_name: "kibana-token"
+elk_kibana_service_token_file: "{{ elk_base_dir }}/.kibana_service_token"
+
+elk_network_name: "elk"
+
+elk_elasticsearch_data_dir: "{{ elk_base_dir }}/elasticsearch/data"
+
+elk_restart_policy: "unless-stopped"

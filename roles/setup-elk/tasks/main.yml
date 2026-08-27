@@ -1,0 +1,185 @@
+---
+- name: Create ELK base directory
+  ansible.builtin.file:
+    path: "{{ elk_base_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+
+- name: Create Elasticsearch data directory
+  ansible.builtin.file:
+    path: "{{ elk_elasticsearch_data_dir }}"
+    state: directory
+    owner: "1000"
+    group: "0"
+    mode: "0755"
+
+
+- name: Deploy Docker Compose file
+  ansible.builtin.template:
+    src: docker-compose.yml.j2
+    dest: "{{ elk_base_dir }}/docker-compose.yml"
+    owner: root
+    group: root
+    mode: "0644"
+
+
+# ---------------------------------------------------------
+# Elasticsearch
+# ---------------------------------------------------------
+
+- name: Start Elasticsearch
+  ansible.builtin.command:
+    cmd: docker compose up -d elasticsearch
+    chdir: "{{ elk_base_dir }}"
+  changed_when: true
+
+
+- name: Wait for Elasticsearch
+  ansible.builtin.uri:
+    url: "http://localhost:{{ elk_elasticsearch_port }}"
+    status_code: 401
+    validate_certs: false
+  register: elk_es_health
+  retries: 60
+  delay: 5
+  until: elk_es_health.status == 401
+
+
+# ---------------------------------------------------------
+# Kibana service token
+# ---------------------------------------------------------
+
+- name: Delete existing Kibana service token
+  ansible.builtin.command:
+    cmd: >
+      docker exec {{ elk_elasticsearch_container_name }}
+      /usr/share/elasticsearch/bin/elasticsearch-service-tokens
+      delete elastic/kibana {{ elk_kibana_service_token_name }}
+  register: elk_token_delete
+  failed_when: false
+  changed_when: false
+
+
+- name: Create Kibana service account token
+  ansible.builtin.command:
+    cmd: >
+      docker exec {{ elk_elasticsearch_container_name }}
+      /usr/share/elasticsearch/bin/elasticsearch-service-tokens
+      create elastic/kibana {{ elk_kibana_service_token_name }}
+  register: elk_token_create
+  retries: 12
+  delay: 5
+  until: elk_token_create.rc == 0
+  no_log: true
+
+
+# ---------------------------------------------------------
+# Extract ONLY the token value
+# ---------------------------------------------------------
+
+- name: Extract Kibana service token
+  ansible.builtin.set_fact:
+    elk_kibana_service_token: >-
+      {{
+        elk_token_create.stdout
+        | regex_search('= ([A-Za-z0-9_-]+)$', '\1')
+        | first
+      }}
+  no_log: true
+
+
+- name: Validate Kibana service token
+  ansible.builtin.assert:
+    that:
+      - elk_kibana_service_token is defined
+      - elk_kibana_service_token | length > 20
+    fail_msg: "Failed to extract a valid Kibana service token."
+  no_log: true
+
+
+# ---------------------------------------------------------
+# Save token
+# ---------------------------------------------------------
+
+- name: Save Kibana service account token
+  ansible.builtin.copy:
+    content: "{{ elk_kibana_service_token }}\n"
+    dest: "{{ elk_kibana_service_token_file }}"
+    owner: root
+    group: root
+    mode: "0600"
+  no_log: true
+
+
+# ---------------------------------------------------------
+# Deploy .env
+# ---------------------------------------------------------
+
+- name: Deploy ELK environment file
+  ansible.builtin.template:
+    src: .env.j2
+    dest: "{{ elk_base_dir }}/.env"
+    owner: root
+    group: root
+    mode: "0600"
+  no_log: true
+
+
+# ---------------------------------------------------------
+# Recreate Kibana
+# ---------------------------------------------------------
+
+- name: Recreate Kibana with new service token
+  ansible.builtin.command:
+    cmd: docker compose up -d --force-recreate kibana
+    chdir: "{{ elk_base_dir }}"
+  changed_when: true
+
+
+# ---------------------------------------------------------
+# Logstash
+# ---------------------------------------------------------
+
+- name: Start Logstash
+  ansible.builtin.command:
+    cmd: docker compose up -d logstash
+    chdir: "{{ elk_base_dir }}"
+  changed_when: true
+
+
+# ---------------------------------------------------------
+# Wait for Kibana
+# ---------------------------------------------------------
+
+- name: Wait for Kibana
+  ansible.builtin.uri:
+    url: "http://localhost:5601/api/status"
+    status_code:
+      - 200
+      - 503
+    return_content: true
+  register: elk_kibana_status
+  retries: 60
+  delay: 5
+  until:
+    - elk_kibana_status.status == 200
+
+
+# ---------------------------------------------------------
+# Show credentials
+# ---------------------------------------------------------
+
+- name: Show ELK credentials
+  ansible.builtin.debug:
+    msg:
+      - "========================================"
+      - "ELK is ready"
+      - "Server: {{ ansible_host | default(inventory_hostname) }}"
+      - "Elasticsearch: http://{{ ansible_host | default(inventory_hostname) }}:{{ elk_elasticsearch_port }}"
+      - "Kibana: http://{{ ansible_host | default(inventory_hostname) }}:5601"
+      - "Username: elastic"
+      - "Password: {{ elk_elastic_password }}"
+      - "========================================"

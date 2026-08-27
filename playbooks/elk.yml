@@ -1,0 +1,4 @@
+- name: setup-elk
+  hosts: all
+  roles:
+    - setup-elk

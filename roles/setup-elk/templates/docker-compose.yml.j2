@@ -1,0 +1,62 @@
+services:
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:{{ elk_version }}
+    container_name: {{ elk_elasticsearch_container_name }}
+    restart: {{ elk_restart_policy }}
+
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "true"
+      xpack.security.enrollment.enabled: "false"
+      ELASTIC_PASSWORD: "${ELASTIC_PASSWORD}"
+      ES_JAVA_OPTS: "{{ elk_elasticsearch_java_opts }}"
+
+    volumes:
+      - {{ elk_elasticsearch_data_dir }}:/usr/share/elasticsearch/data
+
+    ports:
+      - "{{ elk_elasticsearch_port }}:9200"
+
+    networks:
+      - {{ elk_network_name }}
+
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:{{ elk_version }}
+    container_name: {{ elk_kibana_container_name }}
+    restart: {{ elk_restart_policy }}
+
+    environment:
+      ELASTICSEARCH_HOSTS: "http://{{ elk_elasticsearch_container_name }}:9200"
+      ELASTICSEARCH_SERVICEACCOUNTTOKEN: "${ELASTICSEARCH_SERVICEACCOUNTTOKEN}"
+
+    ports:
+      - "{{ elk_kibana_port }}:5601"
+
+    networks:
+      - {{ elk_network_name }}
+
+    depends_on:
+      - elasticsearch
+
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:{{ elk_version }}
+    container_name: {{ elk_logstash_container_name }}
+    restart: {{ elk_restart_policy }}
+
+    ports:
+      - "{{ elk_logstash_port }}:5000"
+      - "{{ elk_logstash_beats_port }}:5044"
+
+    networks:
+      - {{ elk_network_name }}
+
+    depends_on:
+      - elasticsearch
+
+
+networks:
+  {{ elk_network_name }}:
+    driver: bridge

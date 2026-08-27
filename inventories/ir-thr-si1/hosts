@@ -7,3 +7,8 @@ master1
 [all:children]
 workers
 masters
+
+
+[elk:children]
+masters
+workers
