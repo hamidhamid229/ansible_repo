@@ -1,4 +1,4 @@
-# Ansible Project 
+# Ansible Project
 
 ## Clone Repository
 
@@ -66,7 +66,9 @@ Check the target:
 realpath inventories/ir-thr-si1/group_vars/all.yml
 ```
 
-## Run Playbook
+## Run Pre-Setup
+
+The `pre-setup` role prepares the hosts with the required basic configuration.
 
 ```bash
 ansible-playbook \
@@ -74,5 +76,15 @@ ansible-playbook \
   playbooks/site.yml
 ```
 
-> `Pipfile`, `Pipfile.lock`, and symlinks must be committed to Git.
+## Setup ELK
+
+The `setup-elk` role installs and configures the ELK stack.
+
+Run the ELK playbook:
+
+```bash
+ansible-playbook \
+  -i inventories/ir-thr-si1/hosts \
+  playbooks/elk.yml
+```
 
