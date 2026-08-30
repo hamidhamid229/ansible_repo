@@ -71219,3 +71219,337 @@ Origin: /Users/hamid/ansible/roles/setup-elk/tasks/main.yml:130:3
 2026-08-27 16:20:13,087 p=84805 u=hamid n=ansible INFO| PLAY RECAP *************************************************************************************************************************************
 2026-08-27 16:20:13,087 p=84805 u=hamid n=ansible INFO| master1                    : ok=16   changed=6    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 2026-08-27 16:20:13,087 p=84805 u=hamid n=ansible INFO| worker1                    : ok=16   changed=6    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2026-08-30 11:56:21,266 p=99197 u=hamid n=ansible INFO| PLAY [setup-elk] **************************************************************************************************************************************************************
+2026-08-30 11:56:21,277 p=99197 u=hamid n=ansible INFO| TASK [Gathering Facts] ********************************************************************************************************************************************************
+2026-08-30 11:56:25,118 p=99197 u=hamid n=ansible WARNING| [WARNING]: Host 'worker1' is using the discovered Python interpreter at '/usr/bin/python3.10', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+
+2026-08-30 11:56:25,118 p=99197 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 11:56:25,715 p=99197 u=hamid n=ansible WARNING| [WARNING]: Host 'master1' is using the discovered Python interpreter at '/usr/bin/python3.10', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+
+2026-08-30 11:56:25,715 p=99197 u=hamid n=ansible INFO| ok: [master1]
+2026-08-30 11:56:25,718 p=99197 u=hamid n=ansible INFO| TASK [setup-elk : Create ELK base directory] **********************************************************************************************************************************
+2026-08-30 11:56:26,539 p=99197 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 11:56:26,758 p=99197 u=hamid n=ansible INFO| ok: [master1]
+2026-08-30 11:56:26,765 p=99197 u=hamid n=ansible INFO| TASK [setup-elk : Create Elasticsearch data directory] ************************************************************************************************************************
+2026-08-30 11:56:27,426 p=99197 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 11:56:27,667 p=99197 u=hamid n=ansible INFO| ok: [master1]
+2026-08-30 11:56:27,674 p=99197 u=hamid n=ansible INFO| TASK [setup-elk : Create Logstash pipeline directory] *************************************************************************************************************************
+2026-08-30 11:56:28,399 p=99197 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-30 11:56:28,708 p=99197 u=hamid n=ansible INFO| changed: [master1]
+2026-08-30 11:56:28,718 p=99197 u=hamid n=ansible INFO| TASK [setup-elk : Deploy Docker Compose file] *********************************************************************************************************************************
+2026-08-30 11:56:30,431 p=99197 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-30 11:56:30,649 p=99197 u=hamid n=ansible INFO| changed: [master1]
+2026-08-30 11:56:30,655 p=99197 u=hamid n=ansible INFO| TASK [setup-elk : Deploy Logstash pipeline] ***********************************************************************************************************************************
+2026-08-30 11:56:32,034 p=99197 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-30 11:56:32,387 p=99197 u=hamid n=ansible INFO| changed: [master1]
+2026-08-30 11:56:32,395 p=99197 u=hamid n=ansible INFO| TASK [setup-elk : Start Elasticsearch] ****************************************************************************************************************************************
+2026-08-30 11:56:33,668 p=99197 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-30 11:56:34,049 p=99197 u=hamid n=ansible INFO| changed: [master1]
+2026-08-30 11:56:34,058 p=99197 u=hamid n=ansible INFO| TASK [setup-elk : Wait for Elasticsearch] *************************************************************************************************************************************
+2026-08-30 11:56:34,962 p=99197 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 11:56:35,306 p=99197 u=hamid n=ansible INFO| ok: [master1]
+2026-08-30 11:56:35,314 p=99197 u=hamid n=ansible INFO| TASK [setup-elk : Delete existing Kibana service token] ***********************************************************************************************************************
+2026-08-30 11:56:38,216 p=99197 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 11:56:40,478 p=99197 u=hamid n=ansible INFO| ok: [master1]
+2026-08-30 11:56:40,484 p=99197 u=hamid n=ansible INFO| TASK [setup-elk : Create Kibana service account token] ************************************************************************************************************************
+2026-08-30 11:56:43,748 p=99197 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-30 11:56:46,046 p=99197 u=hamid n=ansible INFO| changed: [master1]
+2026-08-30 11:56:46,055 p=99197 u=hamid n=ansible INFO| TASK [setup-elk : Extract Kibana service token] *******************************************************************************************************************************
+2026-08-30 11:56:46,095 p=99197 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 11:56:46,095 p=99197 u=hamid n=ansible INFO| ok: [master1]
+2026-08-30 11:56:46,099 p=99197 u=hamid n=ansible INFO| TASK [setup-elk : Validate Kibana service token] ******************************************************************************************************************************
+2026-08-30 11:56:46,133 p=99197 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 11:56:46,136 p=99197 u=hamid n=ansible INFO| ok: [master1]
+2026-08-30 11:56:46,141 p=99197 u=hamid n=ansible INFO| TASK [setup-elk : Save Kibana service account token] **************************************************************************************************************************
+2026-08-30 11:56:50,399 p=99197 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-30 11:56:51,309 p=99197 u=hamid n=ansible INFO| changed: [master1]
+2026-08-30 11:56:51,316 p=99197 u=hamid n=ansible INFO| TASK [setup-elk : Deploy ELK environment file] ********************************************************************************************************************************
+2026-08-30 11:56:53,382 p=99197 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-30 11:56:53,689 p=99197 u=hamid n=ansible INFO| changed: [master1]
+2026-08-30 11:56:53,696 p=99197 u=hamid n=ansible INFO| TASK [setup-elk : Recreate Kibana with new service token] *********************************************************************************************************************
+2026-08-30 11:56:56,223 p=99197 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-30 11:56:57,360 p=99197 u=hamid n=ansible INFO| changed: [master1]
+2026-08-30 11:56:57,368 p=99197 u=hamid n=ansible INFO| TASK [setup-elk : Recreate Logstash with pipeline] ****************************************************************************************************************************
+2026-08-30 11:57:05,044 p=99197 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-30 11:57:10,793 p=99197 u=hamid n=ansible INFO| changed: [master1]
+2026-08-30 11:57:10,800 p=99197 u=hamid n=ansible INFO| TASK [setup-elk : Wait for Kibana] ********************************************************************************************************************************************
+2026-08-30 11:57:11,668 p=99197 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (60 retries left).
+2026-08-30 11:57:11,826 p=99197 u=hamid n=ansible INFO| FAILED - RETRYING: [master1]: Wait for Kibana (60 retries left).
+2026-08-30 11:57:17,712 p=99197 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (59 retries left).
+2026-08-30 11:57:17,812 p=99197 u=hamid n=ansible INFO| FAILED - RETRYING: [master1]: Wait for Kibana (59 retries left).
+2026-08-30 11:57:23,783 p=99197 u=hamid n=ansible INFO| FAILED - RETRYING: [master1]: Wait for Kibana (58 retries left).
+2026-08-30 11:57:30,153 p=99197 u=hamid n=ansible INFO| FAILED - RETRYING: [master1]: Wait for Kibana (57 retries left).
+2026-08-30 11:57:36,072 p=99197 u=hamid n=ansible INFO| FAILED - RETRYING: [master1]: Wait for Kibana (56 retries left).
+2026-08-30 11:57:40,985 p=99197 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (58 retries left).
+2026-08-30 11:57:46,822 p=99197 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (57 retries left).
+2026-08-30 11:57:52,876 p=99197 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 11:58:12,259 p=99197 u=hamid n=ansible INFO| FAILED - RETRYING: [master1]: Wait for Kibana (55 retries left).
+2026-08-30 11:58:25,933 p=99197 u=hamid n=ansible INFO| FAILED - RETRYING: [master1]: Wait for Kibana (54 retries left).
+2026-08-30 11:58:31,942 p=99197 u=hamid n=ansible INFO| FAILED - RETRYING: [master1]: Wait for Kibana (53 retries left).
+2026-08-30 11:58:40,796 p=99197 u=hamid n=ansible INFO| ok: [master1]
+2026-08-30 11:58:40,808 p=99197 u=hamid n=ansible INFO| TASK [setup-elk : Show ELK credentials] ***************************************************************************************************************************************
+2026-08-30 11:58:40,862 p=99197 u=hamid n=ansible INFO| ok: [worker1] => {
+    "msg": [
+        "========================================",
+        "ELK is ready",
+        "Server: worker1",
+        "Elasticsearch: http://worker1:9200",
+        "Kibana: http://worker1:5601",
+        "Logstash Beats: http://worker1:5044",
+        "Username: elastic",
+        "Password: MyElasticPassword123!",
+        "========================================"
+    ]
+}
+2026-08-30 11:58:40,863 p=99197 u=hamid n=ansible INFO| ok: [master1] => {
+    "msg": [
+        "========================================",
+        "ELK is ready",
+        "Server: master1",
+        "Elasticsearch: http://master1:9200",
+        "Kibana: http://master1:5601",
+        "Logstash Beats: http://master1:5044",
+        "Username: elastic",
+        "Password: MyElasticPassword123!",
+        "========================================"
+    ]
+}
+2026-08-30 11:58:40,869 p=99197 u=hamid n=ansible INFO| PLAY RECAP ********************************************************************************************************************************************************************
+2026-08-30 11:58:40,869 p=99197 u=hamid n=ansible INFO| master1                    : ok=18   changed=9    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2026-08-30 11:58:40,869 p=99197 u=hamid n=ansible INFO| worker1                    : ok=18   changed=9    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2026-08-30 13:24:33,078 p=3261 u=hamid n=ansible INFO| PLAY [setup-elk] **************************************************************************************************************************************************************
+2026-08-30 13:24:33,093 p=3261 u=hamid n=ansible INFO| TASK [Gathering Facts] ********************************************************************************************************************************************************
+2026-08-30 13:24:35,139 p=3261 u=hamid n=ansible WARNING| [WARNING]: Host 'worker1' is using the discovered Python interpreter at '/usr/bin/python3.10', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+
+2026-08-30 13:24:35,140 p=3261 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 13:24:35,144 p=3261 u=hamid n=ansible INFO| TASK [setup-elk : Create ELK base directory] **********************************************************************************************************************************
+2026-08-30 13:24:35,883 p=3261 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-30 13:24:35,889 p=3261 u=hamid n=ansible INFO| TASK [setup-elk : Create Elasticsearch data directory] ************************************************************************************************************************
+2026-08-30 13:24:36,446 p=3261 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-30 13:24:36,452 p=3261 u=hamid n=ansible INFO| TASK [setup-elk : Create Logstash pipeline directory] *************************************************************************************************************************
+2026-08-30 13:24:36,969 p=3261 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-30 13:24:36,974 p=3261 u=hamid n=ansible INFO| TASK [setup-elk : Deploy Docker Compose file] *********************************************************************************************************************************
+2026-08-30 13:24:38,311 p=3261 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-30 13:24:38,316 p=3261 u=hamid n=ansible INFO| TASK [setup-elk : Deploy Logstash pipeline] ***********************************************************************************************************************************
+2026-08-30 13:24:39,450 p=3261 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-30 13:24:39,455 p=3261 u=hamid n=ansible INFO| TASK [setup-elk : Start Elasticsearch] ****************************************************************************************************************************************
+2026-08-30 13:24:40,063 p=3261 u=hamid n=ansible ERROR| [ERROR]: Task failed: Module failed: Error executing command: [Errno 2] No such file or directory: b'docker'
+Origin: /Users/hamid/ansible/roles/setup-elk/tasks/main.yml:83:3
+
+81 # Elasticsearch
+82 # ---------------------------------------------------------
+83 - name: Start Elasticsearch
+     ^ column 3
+
+
+2026-08-30 13:24:40,063 p=3261 u=hamid n=ansible INFO| fatal: [worker1]: FAILED! => {"changed": true, "cmd": "docker compose up -d elasticsearch", "msg": "Error executing command.", "rc": 2, "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
+2026-08-30 13:24:40,064 p=3261 u=hamid n=ansible INFO| PLAY RECAP ********************************************************************************************************************************************************************
+2026-08-30 13:24:40,065 p=3261 u=hamid n=ansible INFO| worker1                    : ok=6    changed=5    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2026-08-30 13:27:32,751 p=3472 u=hamid n=ansible INFO| PLAY [setup-elk] **************************************************************************************************************************************************************
+2026-08-30 13:27:32,760 p=3472 u=hamid n=ansible INFO| TASK [Gathering Facts] ********************************************************************************************************************************************************
+2026-08-30 13:27:35,306 p=3472 u=hamid n=ansible WARNING| [WARNING]: Host 'worker1' is using the discovered Python interpreter at '/usr/bin/python3.10', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+
+2026-08-30 13:27:35,306 p=3472 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 13:27:35,310 p=3472 u=hamid n=ansible INFO| TASK [setup-elk : Create ELK base directory] **********************************************************************************************************************************
+2026-08-30 13:27:35,962 p=3472 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 13:27:35,967 p=3472 u=hamid n=ansible INFO| TASK [setup-elk : Create Elasticsearch data directory] ************************************************************************************************************************
+2026-08-30 13:27:36,618 p=3472 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 13:27:36,622 p=3472 u=hamid n=ansible INFO| TASK [setup-elk : Create Logstash pipeline directory] *************************************************************************************************************************
+2026-08-30 13:27:37,172 p=3472 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 13:27:37,177 p=3472 u=hamid n=ansible INFO| TASK [setup-elk : Deploy Docker Compose file] *********************************************************************************************************************************
+2026-08-30 13:27:38,253 p=3472 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 13:27:38,257 p=3472 u=hamid n=ansible INFO| TASK [setup-elk : Deploy Logstash pipeline] ***********************************************************************************************************************************
+2026-08-30 13:27:39,282 p=3472 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 13:27:39,286 p=3472 u=hamid n=ansible INFO| TASK [setup-elk : Start Elasticsearch] ****************************************************************************************************************************************
+2026-08-30 13:28:10,099 p=3472 u=hamid n=ansible ERROR| [ERROR]: Task failed: Module failed: non-zero return code
+Origin: /Users/hamid/ansible/roles/setup-elk/tasks/main.yml:83:3
+
+81 # Elasticsearch
+82 # ---------------------------------------------------------
+83 - name: Start Elasticsearch
+     ^ column 3
+
+
+2026-08-30 13:28:10,103 p=3472 u=hamid n=ansible INFO| fatal: [worker1]: FAILED! => {"changed": true, "cmd": ["docker", "compose", "up", "-d", "elasticsearch"], "delta": "0:00:30.102719", "end": "2026-08-30 09:58:10.097815", "msg": "non-zero return code", "rc": 1, "start": "2026-08-30 09:57:39.995096", "stderr": "time=\"2026-08-30T09:57:40Z\" level=warning msg=\"The \\\"ELASTICSEARCH_SERVICEACCOUNTTOKEN\\\" variable is not set. Defaulting to a blank string.\"\ntime=\"2026-08-30T09:57:40Z\" level=warning msg=\"The \\\"ELASTIC_PASSWORD\\\" variable is not set. Defaulting to a blank string.\"\ntime=\"2026-08-30T09:57:40Z\" level=warning msg=\"The \\\"ELASTIC_PASSWORD\\\" variable is not set. Defaulting to a blank string.\"\n Image docker.elastic.co/elasticsearch/elasticsearch:9.4.4 Pulling \n Image docker.elastic.co/elasticsearch/elasticsearch:9.4.4 Error failed to resolve reference \"docker.elastic.co/elasticsearch/elasticsearch:9.4.4\": failed to do request: Head \"https://docker.elastic.co/v2/elasticsearch/elasticsearch/manifests/9.4.4\": dial tcp 34.56.16.77:443: i/o timeout\nError response from daemon: failed to resolve reference \"docker.elastic.co/elasticsearch/elasticsearch:9.4.4\": failed to do request: Head \"https://docker.elastic.co/v2/elasticsearch/elasticsearch/manifests/9.4.4\": dial tcp 34.56.16.77:443: i/o timeout", "stderr_lines": ["time=\"2026-08-30T09:57:40Z\" level=warning msg=\"The \\\"ELASTICSEARCH_SERVICEACCOUNTTOKEN\\\" variable is not set. Defaulting to a blank string.\"", "time=\"2026-08-30T09:57:40Z\" level=warning msg=\"The \\\"ELASTIC_PASSWORD\\\" variable is not set. Defaulting to a blank string.\"", "time=\"2026-08-30T09:57:40Z\" level=warning msg=\"The \\\"ELASTIC_PASSWORD\\\" variable is not set. Defaulting to a blank string.\"", " Image docker.elastic.co/elasticsearch/elasticsearch:9.4.4 Pulling ", " Image docker.elastic.co/elasticsearch/elasticsearch:9.4.4 Error failed to resolve reference \"docker.elastic.co/elasticsearch/elasticsearch:9.4.4\": failed to do request: Head \"https://docker.elastic.co/v2/elasticsearch/elasticsearch/manifests/9.4.4\": dial tcp 34.56.16.77:443: i/o timeout", "Error response from daemon: failed to resolve reference \"docker.elastic.co/elasticsearch/elasticsearch:9.4.4\": failed to do request: Head \"https://docker.elastic.co/v2/elasticsearch/elasticsearch/manifests/9.4.4\": dial tcp 34.56.16.77:443: i/o timeout"], "stdout": "", "stdout_lines": []}
+2026-08-30 13:28:10,105 p=3472 u=hamid n=ansible INFO| PLAY RECAP ********************************************************************************************************************************************************************
+2026-08-30 13:28:10,105 p=3472 u=hamid n=ansible INFO| worker1                    : ok=6    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2026-08-30 13:31:04,400 p=3673 u=hamid n=ansible INFO| PLAY [setup-elk] **************************************************************************************************************************************************************
+2026-08-30 13:31:04,411 p=3673 u=hamid n=ansible INFO| TASK [Gathering Facts] ********************************************************************************************************************************************************
+2026-08-30 13:31:06,837 p=3673 u=hamid n=ansible WARNING| [WARNING]: Host 'worker1' is using the discovered Python interpreter at '/usr/bin/python3.10', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+
+2026-08-30 13:31:06,837 p=3673 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 13:31:06,841 p=3673 u=hamid n=ansible INFO| TASK [setup-elk : Create ELK base directory] **********************************************************************************************************************************
+2026-08-30 13:31:07,496 p=3673 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 13:31:07,500 p=3673 u=hamid n=ansible INFO| TASK [setup-elk : Create Elasticsearch data directory] ************************************************************************************************************************
+2026-08-30 13:31:08,066 p=3673 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 13:31:08,070 p=3673 u=hamid n=ansible INFO| TASK [setup-elk : Create Logstash pipeline directory] *************************************************************************************************************************
+2026-08-30 13:31:08,681 p=3673 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 13:31:08,686 p=3673 u=hamid n=ansible INFO| TASK [setup-elk : Deploy Docker Compose file] *********************************************************************************************************************************
+2026-08-30 13:31:09,900 p=3673 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 13:31:09,905 p=3673 u=hamid n=ansible INFO| TASK [setup-elk : Deploy Logstash pipeline] ***********************************************************************************************************************************
+2026-08-30 13:31:12,415 p=3673 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 13:31:12,456 p=3673 u=hamid n=ansible INFO| TASK [setup-elk : Start Elasticsearch] ****************************************************************************************************************************************
+2026-08-30 14:08:35,321 p=3673 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-30 14:08:35,351 p=3673 u=hamid n=ansible INFO| TASK [setup-elk : Wait for Elasticsearch] *************************************************************************************************************************************
+2026-08-30 14:08:36,269 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Elasticsearch (60 retries left).
+2026-08-30 14:08:41,897 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Elasticsearch (59 retries left).
+2026-08-30 14:08:47,831 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Elasticsearch (58 retries left).
+2026-08-30 14:08:53,539 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Elasticsearch (57 retries left).
+2026-08-30 14:08:59,511 p=3673 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 14:08:59,519 p=3673 u=hamid n=ansible INFO| TASK [setup-elk : Delete existing Kibana service token] ***********************************************************************************************************************
+2026-08-30 14:09:03,507 p=3673 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 14:09:03,512 p=3673 u=hamid n=ansible INFO| TASK [setup-elk : Create Kibana service account token] ************************************************************************************************************************
+2026-08-30 14:09:06,578 p=3673 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-30 14:09:06,585 p=3673 u=hamid n=ansible INFO| TASK [setup-elk : Extract Kibana service token] *******************************************************************************************************************************
+2026-08-30 14:09:06,627 p=3673 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 14:09:06,631 p=3673 u=hamid n=ansible INFO| TASK [setup-elk : Validate Kibana service token] ******************************************************************************************************************************
+2026-08-30 14:09:06,660 p=3673 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 14:09:06,663 p=3673 u=hamid n=ansible INFO| TASK [setup-elk : Save Kibana service account token] **************************************************************************************************************************
+2026-08-30 14:09:07,914 p=3673 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-30 14:09:07,919 p=3673 u=hamid n=ansible INFO| TASK [setup-elk : Deploy ELK environment file] ********************************************************************************************************************************
+2026-08-30 14:09:09,139 p=3673 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-30 14:09:09,144 p=3673 u=hamid n=ansible INFO| TASK [setup-elk : Recreate Kibana with new service token] *********************************************************************************************************************
+2026-08-30 14:29:09,577 p=3673 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-30 14:29:09,587 p=3673 u=hamid n=ansible INFO| TASK [setup-elk : Recreate Logstash with pipeline] ****************************************************************************************************************************
+2026-08-30 14:56:01,907 p=3673 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-30 14:56:01,921 p=3673 u=hamid n=ansible INFO| TASK [setup-elk : Wait for Kibana] ********************************************************************************************************************************************
+2026-08-30 14:56:02,753 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (60 retries left).
+2026-08-30 14:56:08,554 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (59 retries left).
+2026-08-30 14:56:14,200 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (58 retries left).
+2026-08-30 14:56:19,981 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (57 retries left).
+2026-08-30 14:56:25,766 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (56 retries left).
+2026-08-30 14:56:31,460 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (55 retries left).
+2026-08-30 14:56:37,172 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (54 retries left).
+2026-08-30 14:56:42,871 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (53 retries left).
+2026-08-30 14:56:48,586 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (52 retries left).
+2026-08-30 14:56:54,268 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (51 retries left).
+2026-08-30 14:56:59,959 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (50 retries left).
+2026-08-30 14:57:10,721 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (49 retries left).
+2026-08-30 14:57:16,605 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (48 retries left).
+2026-08-30 14:57:22,292 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (47 retries left).
+2026-08-30 14:57:27,982 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (46 retries left).
+2026-08-30 14:57:33,662 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (45 retries left).
+2026-08-30 14:57:39,509 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (44 retries left).
+2026-08-30 14:57:45,284 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (43 retries left).
+2026-08-30 14:57:50,938 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (42 retries left).
+2026-08-30 14:57:56,699 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (41 retries left).
+2026-08-30 14:58:02,511 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (40 retries left).
+2026-08-30 14:58:08,378 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (39 retries left).
+2026-08-30 14:58:14,145 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (38 retries left).
+2026-08-30 14:58:19,826 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (37 retries left).
+2026-08-30 14:58:25,669 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (36 retries left).
+2026-08-30 15:03:06,654 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (35 retries left).
+2026-08-30 15:03:12,483 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (34 retries left).
+2026-08-30 15:03:18,311 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (33 retries left).
+2026-08-30 15:03:25,119 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (32 retries left).
+2026-08-30 15:03:30,877 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (31 retries left).
+2026-08-30 15:03:36,679 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (30 retries left).
+2026-08-30 15:03:42,490 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (29 retries left).
+2026-08-30 15:03:48,240 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (28 retries left).
+2026-08-30 15:03:53,939 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (27 retries left).
+2026-08-30 15:03:59,721 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (26 retries left).
+2026-08-30 15:04:05,589 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (25 retries left).
+2026-08-30 15:04:11,290 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (24 retries left).
+2026-08-30 15:04:17,037 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (23 retries left).
+2026-08-30 15:04:22,788 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (22 retries left).
+2026-08-30 15:04:28,592 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (21 retries left).
+2026-08-30 15:04:34,272 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (20 retries left).
+2026-08-30 15:04:40,025 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (19 retries left).
+2026-08-30 15:04:45,710 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (18 retries left).
+2026-08-30 15:04:51,448 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (17 retries left).
+2026-08-30 15:04:57,216 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (16 retries left).
+2026-08-30 15:05:02,996 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (15 retries left).
+2026-08-30 15:05:08,666 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (14 retries left).
+2026-08-30 15:05:14,459 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (13 retries left).
+2026-08-30 15:05:20,102 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (12 retries left).
+2026-08-30 15:05:25,806 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (11 retries left).
+2026-08-30 15:05:31,567 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (10 retries left).
+2026-08-30 15:05:37,300 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (9 retries left).
+2026-08-30 15:05:43,137 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (8 retries left).
+2026-08-30 15:05:48,876 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (7 retries left).
+2026-08-30 15:05:54,522 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (6 retries left).
+2026-08-30 15:06:00,342 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (5 retries left).
+2026-08-30 15:06:06,007 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (4 retries left).
+2026-08-30 15:06:11,704 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (3 retries left).
+2026-08-30 15:06:17,548 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (2 retries left).
+2026-08-30 15:06:23,396 p=3673 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (1 retries left).
+2026-08-30 15:06:29,232 p=3673 u=hamid n=ansible ERROR| [ERROR]: Task failed: Action failed: HTTP Error 503: Service Unavailable
+Origin: /Users/hamid/ansible/roles/setup-elk/tasks/main.yml:246:3
+
+244 # Wait for Kibana
+245 # ---------------------------------------------------------
+246 - name: Wait for Kibana
+      ^ column 3
+
+
+2026-08-30 15:06:29,233 p=3673 u=hamid n=ansible INFO| fatal: [worker1]: FAILED! => {"attempts": 60, "cache_control": "private, no-cache, no-store, must-revalidate", "changed": false, "connection": "close", "content": "{\"status\":{\"overall\":{\"level\":\"unavailable\"}}}", "content_length": "46", "content_security_policy": "script-src 'report-sample' 'self'; worker-src 'report-sample' 'self' blob:; style-src 'report-sample' 'self' 'unsafe-inline'; object-src 'report-sample' 'none'", "content_security_policy_report_only": "form-action 'report-sample' 'self'; default-src 'report-sample' 'none'; font-src 'report-sample' 'self'; img-src 'report-sample' 'self' data: tiles.maps.elastic.co; connect-src 'report-sample' 'self' telemetry.elastic.co telemetry-staging.elastic.co feeds.elastic.co tiles.maps.elastic.co vector.maps.elastic.co; script-src 'report-sample' 'self'; worker-src 'report-sample' 'self' blob:; style-src 'report-sample' 'self' 'unsafe-inline'; object-src 'report-sample' 'none'", "content_type": "application/json; charset=utf-8", "cross_origin_opener_policy": "same-origin", "date": "Sun, 30 Aug 2026 11:36:29 GMT", "elapsed": 0, "elastic_api_version": "2023-10-31", "json": {"status": {"overall": {"level": "unavailable"}}}, "kbn_name": "77eb25b01af5", "msg": "HTTP Error 503: Service Unavailable", "permissions_policy": "camera=(), display-capture=(), fullscreen=(self), geolocation=(), microphone=(), web-share=()", "redirected": false, "referrer_policy": "strict-origin-when-cross-origin", "status": 503, "url": "http://localhost:5601/api/status", "x_content_type_options": "nosniff"}
+2026-08-30 15:06:29,239 p=3673 u=hamid n=ansible INFO| PLAY RECAP ********************************************************************************************************************************************************************
+2026-08-30 15:06:29,240 p=3673 u=hamid n=ansible INFO| worker1                    : ok=16   changed=6    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2026-08-30 15:07:51,372 p=6103 u=hamid n=ansible INFO| PLAY [setup-elk] **************************************************************************************************************************************************************
+2026-08-30 15:07:51,386 p=6103 u=hamid n=ansible INFO| TASK [Gathering Facts] ********************************************************************************************************************************************************
+2026-08-30 15:07:53,975 p=6103 u=hamid n=ansible WARNING| [WARNING]: Host 'worker1' is using the discovered Python interpreter at '/usr/bin/python3.10', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+
+2026-08-30 15:07:53,975 p=6103 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 15:07:53,981 p=6103 u=hamid n=ansible INFO| TASK [setup-elk : Create ELK base directory] **********************************************************************************************************************************
+2026-08-30 15:07:54,743 p=6103 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 15:07:54,750 p=6103 u=hamid n=ansible INFO| TASK [setup-elk : Create Elasticsearch data directory] ************************************************************************************************************************
+2026-08-30 15:07:55,331 p=6103 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 15:07:55,336 p=6103 u=hamid n=ansible INFO| TASK [setup-elk : Create Logstash pipeline directory] *************************************************************************************************************************
+2026-08-30 15:07:56,052 p=6103 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 15:07:56,058 p=6103 u=hamid n=ansible INFO| TASK [setup-elk : Deploy Docker Compose file] *********************************************************************************************************************************
+2026-08-30 15:07:57,283 p=6103 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 15:07:57,289 p=6103 u=hamid n=ansible INFO| TASK [setup-elk : Deploy Logstash pipeline] ***********************************************************************************************************************************
+2026-08-30 15:07:58,497 p=6103 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 15:07:58,500 p=6103 u=hamid n=ansible INFO| TASK [setup-elk : Start Elasticsearch] ****************************************************************************************************************************************
+2026-08-30 15:07:59,420 p=6103 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-30 15:07:59,424 p=6103 u=hamid n=ansible INFO| TASK [setup-elk : Wait for Elasticsearch] *************************************************************************************************************************************
+2026-08-30 15:08:00,248 p=6103 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 15:08:00,251 p=6103 u=hamid n=ansible INFO| TASK [setup-elk : Delete existing Kibana service token] ***********************************************************************************************************************
+2026-08-30 15:08:02,621 p=6103 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 15:08:02,627 p=6103 u=hamid n=ansible INFO| TASK [setup-elk : Create Kibana service account token] ************************************************************************************************************************
+2026-08-30 15:08:05,403 p=6103 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-30 15:08:05,409 p=6103 u=hamid n=ansible INFO| TASK [setup-elk : Extract Kibana service token] *******************************************************************************************************************************
+2026-08-30 15:08:05,480 p=6103 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 15:08:05,483 p=6103 u=hamid n=ansible INFO| TASK [setup-elk : Validate Kibana service token] ******************************************************************************************************************************
+2026-08-30 15:08:05,519 p=6103 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 15:08:05,522 p=6103 u=hamid n=ansible INFO| TASK [setup-elk : Save Kibana service account token] **************************************************************************************************************************
+2026-08-30 15:08:06,905 p=6103 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-30 15:08:06,914 p=6103 u=hamid n=ansible INFO| TASK [setup-elk : Deploy ELK environment file] ********************************************************************************************************************************
+2026-08-30 15:08:08,234 p=6103 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-30 15:08:08,239 p=6103 u=hamid n=ansible INFO| TASK [setup-elk : Recreate Kibana with new service token] *********************************************************************************************************************
+2026-08-30 15:08:09,981 p=6103 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-30 15:08:09,987 p=6103 u=hamid n=ansible INFO| TASK [setup-elk : Recreate Logstash with pipeline] ****************************************************************************************************************************
+2026-08-30 15:08:20,746 p=6103 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-30 15:08:20,754 p=6103 u=hamid n=ansible INFO| TASK [setup-elk : Wait for Kibana] ********************************************************************************************************************************************
+2026-08-30 15:08:21,555 p=6103 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (60 retries left).
+2026-08-30 15:08:46,461 p=6103 u=hamid n=ansible INFO| FAILED - RETRYING: [worker1]: Wait for Kibana (59 retries left).
+2026-08-30 15:08:52,285 p=6103 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 15:08:52,297 p=6103 u=hamid n=ansible INFO| TASK [setup-elk : Show ELK credentials] ***************************************************************************************************************************************
+2026-08-30 15:08:52,361 p=6103 u=hamid n=ansible INFO| ok: [worker1] => {
+    "msg": [
+        "========================================",
+        "ELK is ready",
+        "Server: worker1",
+        "Elasticsearch: http://worker1:9200",
+        "Kibana: http://worker1:5601",
+        "Logstash Beats: http://worker1:5044",
+        "Username: elastic",
+        "Password: MyElasticPassword123!",
+        "========================================"
+    ]
+}
+2026-08-30 15:08:52,365 p=6103 u=hamid n=ansible INFO| PLAY RECAP ********************************************************************************************************************************************************************
+2026-08-30 15:08:52,365 p=6103 u=hamid n=ansible INFO| worker1                    : ok=18   changed=6    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2026-08-30 15:14:36,308 p=6772 u=hamid n=ansible INFO| PLAY [setup-elk] **************************************************************************************************************************************************************
+2026-08-30 15:14:36,320 p=6772 u=hamid n=ansible INFO| TASK [Gathering Facts] ********************************************************************************************************************************************************
+2026-08-30 15:14:38,922 p=6772 u=hamid n=ansible WARNING| [WARNING]: Host 'worker1' is using the discovered Python interpreter at '/usr/bin/python3.10', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+
+2026-08-30 15:14:38,922 p=6772 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 15:14:38,926 p=6772 u=hamid n=ansible INFO| TASK [setup-elk : Create Logstash pipeline directory] *************************************************************************************************************************
+2026-08-30 15:14:39,626 p=6772 u=hamid n=ansible INFO| ok: [worker1]
+2026-08-30 15:14:39,632 p=6772 u=hamid n=ansible INFO| TASK [setup-elk : Deploy Logstash pipeline] ***********************************************************************************************************************************
+2026-08-30 15:14:41,150 p=6772 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-30 15:14:41,156 p=6772 u=hamid n=ansible INFO| TASK [setup-elk : Recreate Logstash with pipeline] ****************************************************************************************************************************
+2026-08-30 15:14:52,082 p=6772 u=hamid n=ansible INFO| changed: [worker1]
+2026-08-30 15:14:52,087 p=6772 u=hamid n=ansible INFO| PLAY RECAP ********************************************************************************************************************************************************************
+2026-08-30 15:14:52,088 p=6772 u=hamid n=ansible INFO| worker1                    : ok=4    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   

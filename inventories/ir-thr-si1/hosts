@@ -1,14 +1,14 @@
 [workers]
 worker1
 
-[masters]
-master1 
+#[masters]
+#master1 
 
 [all:children]
 workers
-masters
+#masters
 
 
 [elk:children]
-masters
+#masters
 workers

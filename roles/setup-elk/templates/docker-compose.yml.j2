@@ -46,6 +46,12 @@ services:
     container_name: {{ elk_logstash_container_name }}
     restart: {{ elk_restart_policy }}
 
+    environment:
+      ELASTIC_PASSWORD: "${ELASTIC_PASSWORD}"
+
+    volumes:
+      - "{{ elk_base_dir }}/logstash/pipeline:/usr/share/logstash/pipeline:ro"
+
     ports:
       - "{{ elk_logstash_port }}:5000"
       - "{{ elk_logstash_beats_port }}:5044"

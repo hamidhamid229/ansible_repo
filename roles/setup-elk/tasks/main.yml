@@ -1,4 +1,6 @@
----
+# ---------------------------------------------------------
+# ELK Base Directories
+# ---------------------------------------------------------
 - name: Create ELK base directory
   ansible.builtin.file:
     path: "{{ elk_base_dir }}"
@@ -6,6 +8,10 @@
     owner: root
     group: root
     mode: "0755"
+  tags:
+    - elk
+    - elk_dirs
+    - directories
 
 
 - name: Create Elasticsearch data directory
@@ -15,8 +21,33 @@
     owner: "1000"
     group: "0"
     mode: "0755"
+  tags:
+    - elk
+    - elk_dirs
+    - directories
+    - elasticsearch
 
 
+# ---------------------------------------------------------
+# Logstash directories
+# ---------------------------------------------------------
+- name: Create Logstash pipeline directory
+  ansible.builtin.file:
+    path: "{{ elk_base_dir }}/logstash/pipeline"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+  tags:
+    - elk
+    - elk_dirs
+    - directories
+    - logstash
+
+
+# ---------------------------------------------------------
+# Docker Compose
+# ---------------------------------------------------------
 - name: Deploy Docker Compose file
   ansible.builtin.template:
     src: docker-compose.yml.j2
@@ -24,17 +55,40 @@
     owner: root
     group: root
     mode: "0644"
+  tags:
+    - elk
+    - compose
+    - config
+
+
+# ---------------------------------------------------------
+# Logstash Pipeline
+# ---------------------------------------------------------
+- name: Deploy Logstash pipeline
+  ansible.builtin.template:
+    src: logstash.conf.j2
+    dest: "{{ elk_base_dir }}/logstash/pipeline/logstash.conf"
+    owner: root
+    group: root
+    mode: "0644"
+  tags:
+    - elk
+    - logstash
+    - config
 
 
 # ---------------------------------------------------------
 # Elasticsearch
 # ---------------------------------------------------------
-
 - name: Start Elasticsearch
   ansible.builtin.command:
     cmd: docker compose up -d elasticsearch
     chdir: "{{ elk_base_dir }}"
   changed_when: true
+  tags:
+    - elk
+    - elasticsearch
+    - start
 
 
 - name: Wait for Elasticsearch
@@ -46,12 +100,15 @@
   retries: 60
   delay: 5
   until: elk_es_health.status == 401
+  tags:
+    - elk
+    - elasticsearch
+    - health
 
 
 # ---------------------------------------------------------
 # Kibana service token
 # ---------------------------------------------------------
-
 - name: Delete existing Kibana service token
   ansible.builtin.command:
     cmd: >
@@ -61,6 +118,11 @@
   register: elk_token_delete
   failed_when: false
   changed_when: false
+  tags:
+    - elk
+    - kibana
+    - kibana_token
+    - security
 
 
 - name: Create Kibana service account token
@@ -74,12 +136,16 @@
   delay: 5
   until: elk_token_create.rc == 0
   no_log: true
+  tags:
+    - elk
+    - kibana
+    - kibana_token
+    - security
 
 
 # ---------------------------------------------------------
 # Extract ONLY the token value
 # ---------------------------------------------------------
-
 - name: Extract Kibana service token
   ansible.builtin.set_fact:
     elk_kibana_service_token: >-
@@ -89,6 +155,11 @@
         | first
       }}
   no_log: true
+  tags:
+    - elk
+    - kibana
+    - kibana_token
+    - security
 
 
 - name: Validate Kibana service token
@@ -98,12 +169,16 @@
       - elk_kibana_service_token | length > 20
     fail_msg: "Failed to extract a valid Kibana service token."
   no_log: true
+  tags:
+    - elk
+    - kibana
+    - kibana_token
+    - security
 
 
 # ---------------------------------------------------------
 # Save token
 # ---------------------------------------------------------
-
 - name: Save Kibana service account token
   ansible.builtin.copy:
     content: "{{ elk_kibana_service_token }}\n"
@@ -112,12 +187,16 @@
     group: root
     mode: "0600"
   no_log: true
+  tags:
+    - elk
+    - kibana
+    - kibana_token
+    - security
 
 
 # ---------------------------------------------------------
 # Deploy .env
 # ---------------------------------------------------------
-
 - name: Deploy ELK environment file
   ansible.builtin.template:
     src: .env.j2
@@ -126,34 +205,44 @@
     group: root
     mode: "0600"
   no_log: true
+  tags:
+    - elk
+    - env
+    - config
+    - security
 
 
 # ---------------------------------------------------------
 # Recreate Kibana
 # ---------------------------------------------------------
-
 - name: Recreate Kibana with new service token
   ansible.builtin.command:
     cmd: docker compose up -d --force-recreate kibana
     chdir: "{{ elk_base_dir }}"
   changed_when: true
+  tags:
+    - elk
+    - kibana
+    - start
 
 
 # ---------------------------------------------------------
 # Logstash
 # ---------------------------------------------------------
-
-- name: Start Logstash
+- name: Recreate Logstash with pipeline
   ansible.builtin.command:
-    cmd: docker compose up -d logstash
+    cmd: docker compose up -d --force-recreate logstash
     chdir: "{{ elk_base_dir }}"
   changed_when: true
+  tags:
+    - elk
+    - logstash
+    - start
 
 
 # ---------------------------------------------------------
 # Wait for Kibana
 # ---------------------------------------------------------
-
 - name: Wait for Kibana
   ansible.builtin.uri:
     url: "http://localhost:5601/api/status"
@@ -166,12 +255,15 @@
   delay: 5
   until:
     - elk_kibana_status.status == 200
+  tags:
+    - elk
+    - kibana
+    - health
 
 
 # ---------------------------------------------------------
 # Show credentials
 # ---------------------------------------------------------
-
 - name: Show ELK credentials
   ansible.builtin.debug:
     msg:
@@ -180,6 +272,11 @@
       - "Server: {{ ansible_host | default(inventory_hostname) }}"
       - "Elasticsearch: http://{{ ansible_host | default(inventory_hostname) }}:{{ elk_elasticsearch_port }}"
       - "Kibana: http://{{ ansible_host | default(inventory_hostname) }}:5601"
+      - "Logstash Beats: http://{{ ansible_host | default(inventory_hostname) }}:{{ elk_logstash_beats_port }}"
       - "Username: elastic"
       - "Password: {{ elk_elastic_password }}"
       - "========================================"
+  tags:
+    - elk
+    - credentials
+    
